@@ -17,9 +17,12 @@ namespace NaiveWordCounter
 
 	public class FileHandler
 	{
-		public string ReadTextFile(string filePath)
+		public string ReadTextFile(string fileName)
 		{
-			return "The quick brown fox";
+			var bookFolder = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Books"));
+			var filePath = Path.Combine(bookFolder, fileName);
+			var content = File.ReadAllText(filePath).ToString();
+			return content;
 		}
 	}
 }
