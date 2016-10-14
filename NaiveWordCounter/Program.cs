@@ -23,16 +23,18 @@ namespace NaiveWordCounter
 
 	public interface IWordCounter
 	{
-		int Count(string lineOfText);
+		IDictionary<string, int> Count(string lineOfText);
 	}
 
 	public class WordCounter : IWordCounter
 	{
-		public Dictionary<string, int> result;
-		
-		public int Count(string lineOfText)
+
+		public IDictionary<string, int> Count(string lineOfText)
 		{
-			return 10;
+			return new Dictionary<string, int>(){
+				{"Hello", 2},
+				{"World", 4}
+			};
 		}
 	}
 

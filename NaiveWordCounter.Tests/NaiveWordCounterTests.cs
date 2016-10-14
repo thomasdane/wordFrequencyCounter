@@ -54,27 +54,12 @@ namespace NaiveWordCounter.Tests
 		}
 
 		[Test]
-		public void CountWords_ShouldReturnCorrectNumber_WhenCalledFromParallelMethod()
-		{
-			//Arrange
-			var expectedOutput = 10;
-			var fileName = "42LinesOfText.txt";
-			var wordCounter = new WordCounter();
-
-			//Act
-			var actualOutput = wordCounter.Count(fileName);
-
-			Assert.AreEqual(expectedOutput, actualOutput);
-
-		}
-
-		[Test]
-		public void CountWords_ShouldReturnDictionaryOfCorrectNumbers() //TODO: look up if this is okay test naming convention
+		public void CountWords_ShouldReturnDictionaryOfCorrectNumbers_WhenPassedString()
 		{
 			//Arrange
 			var expectedOutput = new Dictionary<string, int>(){
-				{"hello", 2},
-				{"world", 4}
+				{"Hello", 2},
+				{"World", 4}
 			};
 			var wordCounter = new WordCounter();
 			var input = "hello world world hello world world";
@@ -83,7 +68,7 @@ namespace NaiveWordCounter.Tests
 			var actualOutput = wordCounter.Count(input);
 
 			//Arrange
-			Assert.AreEqual(expectedOutput, actualOutput);
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
 
 		}
 

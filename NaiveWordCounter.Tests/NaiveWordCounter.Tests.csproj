@@ -89,6 +89,7 @@
   <ItemGroup>
     <Content Include="Books\TestInput.txt" />
     <Content Include="Books\42LinesOfText.txt" />
+    <Content Include="Books\helloWorld.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
