@@ -23,10 +23,12 @@ namespace NaiveWordCounter.Tests
 		public void ReadTextFile_ShouldReturnText_WhenProvidedTxtFile()
 		{
 			//Arrange
-			var text = "the quick brown fox";
+			var text = "The quick brown fox";
+			var pathToFile = "test book";
+			var fileHandler = new FileHandler();
 
 			//Act
-			var result = ReadTextFile(pathToFile); //I may have to address porblems loading extremely long books into memory like this. 
+			var result = fileHandler.ReadTextFile(pathToFile); //I may have to address porblems loading extremely long books into memory like this. 
 
 			Assert.AreEqual(text, result);
 		}
