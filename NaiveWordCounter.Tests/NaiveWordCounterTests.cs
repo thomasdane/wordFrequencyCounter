@@ -23,14 +23,30 @@ namespace NaiveWordCounter.Tests
 		public void ReadTextFile_ShouldReturnText_WhenProvidedTxtFile()
 		{
 			//Arrange
-			var content = "The quick brown fox";
-			var fileName = "TestInput.txt";
+			var expectedOutput = "The quick brown fox";
+			var fileName = "TestInput.txt"; //TODO: rename this. 
 			var fileHandler = new FileHandler();
 
 			//Act
-			var result = fileHandler.ReadTextFile(fileName); //I may have to address porblems loading extremely long books into memory like this. 
+			var actualOutput = fileHandler.ReadTextFile(fileName); //I may have to address porblems loading extremely long books into memory like this. 
 
-			Assert.AreEqual(content, result);
+			//Assert
+			Assert.AreEqual(expectedOutput, actualOutput);
+		}
+
+		[Test]
+		public void ReadTextFile_ShouldReturnArrayOfLines_WhenProvidedLongerTextFile()
+		{
+			//Arrange
+			var expectedOutput = new string[42];
+			var fileName = "42LinesOfText.txt";
+			var fileHandler = new FileHandler();
+
+			//Act
+			var actualOutput = fileHandler.ReadTextFile(fileName);
+
+			//Assert
+			Assert.AreEqual(expectedOutput.Length, actualOutput.Length);
 		}
     }
 }
