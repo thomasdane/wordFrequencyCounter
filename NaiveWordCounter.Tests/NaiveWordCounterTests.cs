@@ -58,9 +58,11 @@ namespace NaiveWordCounter.Tests
 		{
 			//Arrange
 			var expectedOutput = 10;
+			var fileName = "42LinesOfText.txt";
+			var wordCounter = new WordCounter();
 
 			//Act
-			var actualOutput = CountWords(string lineOfText);
+			var actualOutput = wordCounter.Count(fileName);
 
 			Assert.AreEqual(expectedOutput, actualOutput);
 

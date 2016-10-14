@@ -15,6 +15,14 @@ namespace NaiveWordCounter
 		}
 	}
 
+	public class WordCounter
+	{
+		public int Count(string lineOfText)
+		{
+			return 10;
+		}
+	}
+
 	public class FileHandler
 	{
 		public string[] ReadTextFile(string fileName)
@@ -22,10 +30,11 @@ namespace NaiveWordCounter
 			var bookFolder = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Books"));
 			var filePath = Path.Combine(bookFolder, fileName);
 			var content = File.ReadAllLines(filePath);
+			var wordCounter = new WordCounter();
 
 			Parallel.For(0, content.Length, x =>
 			{
-				TestReadingAndProcessingLinesFromFile_DoStuff(content[x]);
+				wordCounter.Count(content[x]);
 			});
 
 			return content;
