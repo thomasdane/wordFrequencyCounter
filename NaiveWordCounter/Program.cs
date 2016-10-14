@@ -26,6 +26,22 @@ namespace NaiveWordCounter
 		IDictionary<string, int> Count(string lineOfText);
 	}
 
+	public class TextProcessor
+	{
+		public void ParallelProcess(string[] content)
+		{
+			var wordCounter = new WordCounter();
+
+			Parallel.For(0, content.Length, x =>
+			{
+				wordCounter.Count(content[x]);
+			});
+		}
+	}
+
+	//you have a dictionary
+	// you loo
+
 	public class WordCounter : IWordCounter
 	{
 		private static readonly char[] separators = { ' ' };
@@ -49,19 +65,6 @@ namespace NaiveWordCounter
 			}
 
 			return wordCount;
-		}
-	}
-
-	public class TextProcessor
-	{
-		public void ParallelProcess(string[] content)
-		{
-			var wordCounter = new WordCounter();
-
-			Parallel.For(0, content.Length, x =>
-			{
-				wordCounter.Count(content[x]);
-			});
 		}
 	}
 

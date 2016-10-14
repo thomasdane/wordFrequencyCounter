@@ -20,7 +20,7 @@ Parellism
 Notes
 
 - there is a 2 GB limit on any object in .Net. I won't be able to handle lines longer than that. 
-- this post talks about a concurrent dictionary which i might explore http://codereview.stackexchange.com/questions/90925/word-frequency-in-a-large-text-file
+- Concurrent Dictionary is a thread-safe dictionary http://geekswithblogs.net/blackrabbitcoder/archive/2011/02/17/c.net-little-wonders-the-concurrentdictionary.aspx
 - article about how string.split could create a large number of string objects if the line is long, and perhaps parsing by chars is faster http://stackoverflow.com/questions/8784517/counting-number-of-words-in-c-sharp
 - i need to benchmark this solution and my next one and compare them
 
