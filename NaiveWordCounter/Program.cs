@@ -13,12 +13,20 @@ namespace NaiveWordCounter
 		static void Main(string[] args)
 		{
 
-			var file = "TestInput.txt";
-			var fileHandler = new FileHandler();
-			var content = fileHandler.ReadTextFile(file);
-			//now i want to get a dictionary of words and frequencies
-			//var result = getWordCount
+		}
+	}
 
+	public class Runner
+	{
+		public IDictionary<string, int> GetResults(string fileName)
+		{
+			var fileHandler = new FileHandler();
+			var content = fileHandler.ReadTextFile(fileName);
+
+			var wordCounter = new WordCounter();
+			var result = wordCounter.Count(content);
+
+			return result;
 		}
 	}
 

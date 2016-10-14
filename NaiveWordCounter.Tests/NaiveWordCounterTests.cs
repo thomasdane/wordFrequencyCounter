@@ -80,5 +80,22 @@ namespace NaiveWordCounter.Tests
 			//Arrange
 			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
 		}
+
+		[Test]
+		//this is more of an integration test, i will move to another project later.
+		public void GetResults_ShouldReturnDictionary_WhenPassedSampleBook_RailwayChildren()
+		{
+			//Arrange
+			var expectedOutput = new Dictionary<string, int>() { };
+			var runner = new Runner();
+			var input = "RailwayChildren.txt";
+
+			//Act
+			var actualOutput = runner.GetResults(input);
+
+			//Assert
+			CollectionAssert.IsNotEmpty(actualOutput);
+			CollectionAssert.AllItemsAreNotNull(actualOutput);
+		}
 	}
 }

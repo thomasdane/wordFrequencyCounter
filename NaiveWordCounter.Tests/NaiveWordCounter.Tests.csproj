@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Books\HelloWorld.txt" />
+    <Content Include="Books\RailwayChildren.txt" />
     <Content Include="Books\SingleSentence.txt" />
     <Content Include="Books\42LinesOfText.txt" />
     <Content Include="Books\VerySmallBook.txt" />
