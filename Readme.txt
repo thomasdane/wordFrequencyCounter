@@ -2,7 +2,7 @@ Readme
 
 Optimizations and scaling
 
-1. What if we wanted to process multiple books at once? Could use async or multithreading. 
+
 2. Do we need to load entire book into memory? Could we parse it bit by bit? Discussion below. 
 
 Discussion: how to quickly read a large text file 
@@ -20,3 +20,10 @@ Parellism
 Notes
 
 - there is a 2 GB limit on any object in .Net. I won't be able to handle lines longer than that. 
+- this post talks about a concurrent dictionary which i might explore http://codereview.stackexchange.com/questions/90925/word-frequency-in-a-large-text-file
+- article about how string.split could create a large number of string objects if the line is long, and perhaps parsing by chars is faster http://stackoverflow.com/questions/8784517/counting-number-of-words-in-c-sharp
+- i need to benchmark this solution and my next one and compare them
+
+Limitations and Extensions
+- What if we wanted to process multiple books at once? Could use more multithreading?
+- The brute force solution to that problem would be to spin this up on multiple instances and process 1 book per instance

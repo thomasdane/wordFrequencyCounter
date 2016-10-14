@@ -28,13 +28,27 @@ namespace NaiveWordCounter
 
 	public class WordCounter : IWordCounter
 	{
+		private static readonly char[] separators = { ' ' };
 
 		public IDictionary<string, int> Count(string lineOfText)
 		{
-			return new Dictionary<string, int>(){
-				{"Hello", 2},
-				{"World", 4}
-			};
+			
+			var words = lineOfText.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+			var wordCount = new Dictionary<string, int>();
+
+			foreach (var word in words)
+			{
+				if (wordCount.ContainsKey(word))
+				{
+					wordCount[word] = wordCount[word] + 1;
+				}
+				else
+				{
+					wordCount.Add(word, 1);
+				}
+			}
+
+			return wordCount;
 		}
 	}
 
