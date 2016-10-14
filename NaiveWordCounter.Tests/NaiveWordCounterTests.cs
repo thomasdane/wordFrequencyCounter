@@ -72,34 +72,12 @@ namespace NaiveWordCounter.Tests
 				{"world", 4}
 			};
 			var wordCounter = new WordCounter();
-			var input = "hello world world hello world world";
+			var input = new string[2] { "hello world world", "hello world world" };
 
 			//Act
 			var actualOutput = wordCounter.Count(input);
 
 			//Arrange
-			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
-
-		}
-
-		[Test]
-		//this is more of an integration test. I'll move to separate project later. 
-		public void TextProcessor_ShouldReturnCorrectDictionary_WhenPassedArrayOfStrings()
-		{
-			//Arrange
-			var expectedOutput = new Dictionary<string, int>(){
-				{"hello", 2},
-				{"world", 4}
-			};
-
-			var input = new string[2]{"hello world world", "hello world world"};
-			var wordCounter = new WordCounter();
-			var textProcessor = new TextProcessor();
-
-			//Act
-			var actualOutput = textProcessor.ParallelProcess(input);
-
-			//Assert
 			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
 		}
 	}

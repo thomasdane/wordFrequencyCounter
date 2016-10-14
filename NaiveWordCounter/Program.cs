@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Collections.Concurrent;
 
 namespace NaiveWordCounter
 {
@@ -23,48 +24,30 @@ namespace NaiveWordCounter
 
 	public interface IWordCounter
 	{
-		IDictionary<string, int> Count(string lineOfText);
+		IDictionary<string, int> Count(string[] linesOfText);
 	}
-
-	public class TextProcessor
-	{
-		public void ParallelProcess(string[] content)
-		{
-			var wordCounter = new WordCounter();
-
-			Parallel.For(0, content.Length, x =>
-			{
-				wordCounter.Count(content[x]);
-			});
-		}
-	}
-
-	//you have a dictionary
-	// you loo
 
 	public class WordCounter : IWordCounter
 	{
-		private static readonly char[] separators = { ' ' };
-
-		public IDictionary<string, int> Count(string lineOfText)
+		public IDictionary<string, int> Count(string[] linesOfText)
 		{
-			
-			var words = lineOfText.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-			var wordCount = new Dictionary<string, int>();
+			var result = new ConcurrentDictionary<string, int>();
 
-			foreach (var word in words)
+			Parallel.For(0, linesOfText.Length, x =>
 			{
-				if (wordCount.ContainsKey(word))
-				{
-					wordCount[word] = wordCount[word] + 1;
-				}
-				else
-				{
-					wordCount.Add(word, 1);
-				}
-			}
+				var line = linesOfText[x];
+				var words = line.Split(' ');
 
-			return wordCount;
+				foreach (var word in words)
+				{
+					//Add the word with a value of 1 if it does NOT exist
+					//Otherwise, add it as a new key, and add 1 to its value
+					//Good explanation here https://www.dotnetperls.com/concurrentdictionary
+					result.AddOrUpdate(word, 1, (key, value) => value + 1);
+				}
+			});
+
+			return result;
 		}
 	}
 
