@@ -1,0 +1,1 @@
+C:\git\NaiveWordCounter\NaiveWordCounter\bin\Debug\NaiveWordCounter.exe.config
