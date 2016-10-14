@@ -28,18 +28,20 @@ namespace NaiveWordCounter.Tests
 			var fileHandler = new FileHandler();
 
 			//Act
-			var actualOutput = fileHandler.ReadTextFile(fileName); //I may have to address porblems loading extremely long books into memory like this. 
+			var actualOutput = fileHandler.ReadTextFile(fileName);  
 
 			//Assert
-			Assert.AreEqual(expectedOutput, actualOutput);
+			Assert.AreEqual(expectedOutput, actualOutput.First().ToString()); //as this text file has only one line, this will suffice for now
 		}
 
 		[Test]
-		public void ReadTextFile_ShouldReturnArrayOfLines_WhenProvidedLongerTextFile()
+		public void ReadTextFile_ShouldReturnListOfLines_WhenProvidedLongerTextFile()
 		{
 			//Arrange
-			var expectedOutput = new string[42];
 			var fileName = "42LinesOfText.txt";
+			var expectedOutput = new string[42]; //I will have to develop a solution for very large books. 
+			var firstLine = "Lorem ipsum dolor sit amet";
+			var lastLine = "deserunt mollit anim id est laborum";
 			var fileHandler = new FileHandler();
 
 			//Act
@@ -47,6 +49,8 @@ namespace NaiveWordCounter.Tests
 
 			//Assert
 			Assert.AreEqual(expectedOutput.Length, actualOutput.Length);
+			Assert.AreEqual(firstLine, actualOutput.First().ToString());
+			Assert.AreEqual(lastLine, actualOutput.Last().ToString());
 		}
     }
 }

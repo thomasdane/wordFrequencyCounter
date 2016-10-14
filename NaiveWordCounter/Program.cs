@@ -17,11 +17,17 @@ namespace NaiveWordCounter
 
 	public class FileHandler
 	{
-		public string ReadTextFile(string fileName)
+		public string[] ReadTextFile(string fileName)
 		{
 			var bookFolder = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Books"));
 			var filePath = Path.Combine(bookFolder, fileName);
-			var content = File.ReadAllText(filePath).ToString();
+			var content = File.ReadAllLines(filePath);
+
+			//Parallel.For(0, allLines.Length, x =>
+			//{
+			//	TestReadingAndProcessingLinesFromFile_DoStuff(AllLines[x]);
+			//});
+
 			return content;
 		}
 	}

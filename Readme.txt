@@ -1,4 +1,4 @@
-Notes
+Readme
 
 Optimizations and scaling
 
@@ -12,13 +12,6 @@ At the end of each processing, we have a total for the line. We can then add all
 The article also shows that pre-allocating the size of the array has speed improvements. For simplicity now, I will not do that but can return to it later. It seemed to depend not on the size of the file, but on the length of the line. 
 I do not expect many lines in a book to be 25 GUIDs long like the author of that article. 
 
-Here is the code:
+Notes
 
-var allLines = new string[MAX]; //only allocate memory here
-			allLines = File.ReadAllLines(fileName);
-			Parallel.For(0, allLines.Length, x =>
-			{
-				TestReadingAndProcessingLinesFromFile_DoStuff(AllLines[x]);
-			});
-
-I will write just the minimum code now though to get my test to pass. 
+- there is a 2 GB limit on any object in .Net. I won't be able to handle lines longer than that. 
