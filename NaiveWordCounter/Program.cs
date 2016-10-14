@@ -23,10 +23,10 @@ namespace NaiveWordCounter
 			var filePath = Path.Combine(bookFolder, fileName);
 			var content = File.ReadAllLines(filePath);
 
-			//Parallel.For(0, allLines.Length, x =>
-			//{
-			//	TestReadingAndProcessingLinesFromFile_DoStuff(AllLines[x]);
-			//});
+			Parallel.For(0, content.Length, x =>
+			{
+				TestReadingAndProcessingLinesFromFile_DoStuff(content[x]);
+			});
 
 			return content;
 		}

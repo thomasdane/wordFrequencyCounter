@@ -52,5 +52,18 @@ namespace NaiveWordCounter.Tests
 			Assert.AreEqual(firstLine, actualOutput.First().ToString());
 			Assert.AreEqual(lastLine, actualOutput.Last().ToString());
 		}
+
+		[Test]
+		public void CountWords_ShouldReturnCorrectNumber_WhenCalledFromParallelMethod()
+		{
+			//Arrange
+			var expectedOutput = 10;
+
+			//Act
+			var actualOutput = CountWords(string lineOfText);
+
+			Assert.AreEqual(expectedOutput, actualOutput);
+
+		}
     }
 }
