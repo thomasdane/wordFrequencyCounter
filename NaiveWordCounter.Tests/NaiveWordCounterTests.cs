@@ -67,5 +67,25 @@ namespace NaiveWordCounter.Tests
 			Assert.AreEqual(expectedOutput, actualOutput);
 
 		}
+
+		[Test]
+		public void CountWords_ShouldReturnDictionaryOfCorrectNumbers() //TODO: look up if this is okay test naming convention
+		{
+			//Arrange
+			var expectedOutput = new Dictionary<string, int>(){
+				{"hello", 2},
+				{"world", 4}
+			};
+			var wordCounter = new WordCounter();
+			var input = "hello world world hello world world";
+
+			//Act
+			var actualOutput = wordCounter.Count(input);
+
+			//Arrange
+			Assert.AreEqual(expectedOutput, actualOutput);
+
+		}
+
     }
 }

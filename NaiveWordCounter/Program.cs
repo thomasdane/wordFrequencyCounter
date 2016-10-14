@@ -16,7 +16,8 @@ namespace NaiveWordCounter
 			var fileHandler = new FileHandler();
 			var content = fileHandler.ReadTextFile(file);
 			//now i want to get a dictionary of words and frequencies
-		
+			//var result = getWordCount
+
 		}
 	}
 
