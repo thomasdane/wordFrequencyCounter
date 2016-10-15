@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Collections.Concurrent;
+using System.Text.RegularExpressions;
 
 namespace NaiveWordCounter
 {
@@ -40,18 +41,25 @@ namespace NaiveWordCounter
 		public IDictionary<string, int> Count(string[] linesOfText)
 		{
 			var result = new ConcurrentDictionary<string, int>();
+			var regex = new Regex("[^a-zA-z]");
 
 			Parallel.For(0, linesOfText.Length, x =>
 			{
 				var line = linesOfText[x];
-				var words = line.Split(' ');
+				var lineChunks = line.Split(' ');
 
-				foreach (var word in words)
+				foreach (var chunk in lineChunks)
 				{
-					//Add the word with a value of 1 if it does NOT exist
-					//Otherwise, add it as a new key, and add 1 to its value
-					//Good explanation here https://www.dotnetperls.com/concurrentdictionary
-					result.AddOrUpdate(word, 1, (key, value) => value + 1);
+					var word = regex.Replace(chunk, "").ToLower();
+			
+					if (!string.IsNullOrEmpty(word))
+					{
+						result.AddOrUpdate(word, 1, (key, value) => value + 1);
+						//AddOrUpdate: 
+						//Add the word (first param) with a value of 1 (second param) if it does NOT exist
+						//Otherwise, add it as a new key, and add 1 to its value (third param)
+						//Good explanation here https://www.dotnetperls.com/concurrentdictionary
+					}
 				}
 			});
 

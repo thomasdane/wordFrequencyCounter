@@ -131,5 +131,6 @@ namespace NaiveWordCounter.Tests
 			//Arrange
 			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
 		}
+
 	}
 }
