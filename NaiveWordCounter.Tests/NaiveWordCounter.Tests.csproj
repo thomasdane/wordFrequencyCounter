@@ -92,6 +92,7 @@
     <Content Include="Books\SingleSentence.txt" />
     <Content Include="Books\42LinesOfText.txt" />
     <Content Include="Books\VerySmallBook.txt" />
+    <Content Include="Books\WarAndPeace.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

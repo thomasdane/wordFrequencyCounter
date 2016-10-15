@@ -97,5 +97,39 @@ namespace NaiveWordCounter.Tests
 			CollectionAssert.IsNotEmpty(actualOutput);
 			CollectionAssert.AllItemsAreNotNull(actualOutput);
 		}
+
+		[Test]
+		public void GetResults_ShouldReturnDictionary_WhenPassedSampleBook_WarAndPeace()
+		{
+			//Arrange
+			var expectedOutput = new Dictionary<string, int>() { };
+			var runner = new Runner();
+			var input = "WarAndPeace.txt";
+
+			//Act
+			var actualOutput = runner.GetResults(input);
+
+			//Assert
+			CollectionAssert.IsNotEmpty(actualOutput);
+			CollectionAssert.AllItemsAreNotNull(actualOutput);
+		}
+
+		[Test]
+		public void WordCounter_ShouldIgnorePunctuationAndNumbers_WhenPassedText()
+		{
+			//Arrange
+			var expectedOutput = new Dictionary<string, int>(){
+				{"hello", 2},
+				{"world", 4}
+			};
+			var wordCounter = new WordCounter();
+			var input = new string[2] { "Hello worlD & World 1", "hello WORLD, world 1" };
+
+			//Act
+			var actualOutput = wordCounter.Count(input);
+
+			//Arrange
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
+		}
 	}
 }
