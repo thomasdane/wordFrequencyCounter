@@ -146,6 +146,27 @@ namespace NaiveWordCounter.Tests
 		}
 
 		[Test]
+		public void GetTotal_ShouldReturnSummedDictionary_WhenPassedRawResults()
+		{
+			//I realised I was not summing the dictionary.
+			//The same word was counted twice if it was in different lines
+			var expectedOutput = new Dictionary<string, int>(){
+				{"hello", 3},
+				{"world", 4},
+				{"meerkat", 1}
+			};
+
+			var wordCounter = new WordCounter();
+			var input = new string[3] { "hello world world", "hello hello world world world", "meerkat world" };
+
+			//Act
+			var actualOutput = wordCounter.GetTotal(input);
+
+			//Arrange
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
+		}
+
+		[Test]
 		public void WordCounter_ShouldIgnorePunctuationAndNumbers_WhenPassedEnglishText()
 		{
 			//Arrange

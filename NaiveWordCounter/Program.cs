@@ -34,10 +34,16 @@ namespace NaiveWordCounter
 	public interface IWordCounter
 	{
 		IDictionary<string, int> Count(string[] linesOfText);
+		IDictionary<string, int> GetDistinct(IDictionary<string, int> fullResults);
 	}
 
 	public class WordCounter : IWordCounter
 	{
+		private IDictionary<string, int> GetTotal(IDictionary<string, int> fullResults)
+		{
+			return fullResults;
+		}
+		
 		public IDictionary<string, int> Count(string[] linesOfText)
 		{
 			var result = new ConcurrentDictionary<string, int>();
@@ -63,7 +69,8 @@ namespace NaiveWordCounter
 				}
 			});
 
-			return result;
+			var distinctResults = GetTotal(result);
+			return distinctResults;
 		}
 	}
 
