@@ -87,6 +87,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Books\AFewSentences.txt" />
     <Content Include="Books\HelloWorld.txt" />
     <Content Include="Books\RailwayChildren.txt" />
     <Content Include="Books\SingleSentence.txt" />

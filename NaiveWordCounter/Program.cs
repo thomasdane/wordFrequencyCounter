@@ -34,12 +34,12 @@ namespace NaiveWordCounter
 	public interface IWordCounter
 	{
 		IDictionary<string, int> Count(string[] linesOfText);
-		IDictionary<string, int> GetDistinct(IDictionary<string, int> fullResults);
+		IDictionary<string, int> GetTotal(IDictionary<string, int> fullResults);
 	}
 
 	public class WordCounter : IWordCounter
 	{
-		private IDictionary<string, int> GetTotal(IDictionary<string, int> fullResults)
+		public IDictionary<string, int> GetTotal(IDictionary<string, int> fullResults)
 		{
 			return fullResults;
 		}
@@ -47,7 +47,7 @@ namespace NaiveWordCounter
 		public IDictionary<string, int> Count(string[] linesOfText)
 		{
 			var result = new ConcurrentDictionary<string, int>();
-			var regex = new Regex("[^\\p{L}.*]");
+			var regex = new Regex("[^\\p{L}]");
 
 			Parallel.For(0, linesOfText.Length, x =>
 			{
@@ -69,8 +69,9 @@ namespace NaiveWordCounter
 				}
 			});
 
-			var distinctResults = GetTotal(result);
-			return distinctResults;
+			return result;
+			//var distinctResults = GetTotal(result);
+			//return distinctResults;
 		}
 	}
 

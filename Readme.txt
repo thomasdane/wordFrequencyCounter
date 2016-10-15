@@ -30,7 +30,8 @@ Notes
 Limitations and Extensions
 - What if we wanted to process multiple books at once? Could use more multithreading?
 - The brute force solution to that problem would be to spin this up on multiple instances and process 1 book per instance
-
+- words with hyphens will have issues. they will be counted correctly, but display incorrectly. for example,
+free-for-all will be displayed as freeforall. 
 
 Requirements
 

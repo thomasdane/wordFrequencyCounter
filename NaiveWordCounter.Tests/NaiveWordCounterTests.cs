@@ -119,18 +119,18 @@ namespace NaiveWordCounter.Tests
 		public void GetResults_ShouldReturnCorrectCount_WhenPassedThePlacesYoullGo()
 		{
 			//Arrange
-			var expectedOutputTopTen = new Dictionary<string, int>() { 
+			var expectedOutput = new Dictionary<string, int>() { 
 				//I used http://www.writewords.org.uk/word_count.asp to verify the results
+				{"you", 22},
+				{"and", 16},
 				{"youll", 15},
+				{"your", 13},
+				{"to", 10},
+				{"the", 9},
 				{"go", 8},
-				{"youre", 5},
-				{"great", 5},
-				{"dont", 4},
-				{"know", 3},
-				{"happen", 3},
-				{"off", 3},
-				{"down", 3},
-				{"head", 3}
+				{"be", 6},
+				{"of", 6},
+				{"great", 5}
 			};
 			
 			var runner = new Runner();
@@ -138,34 +138,38 @@ namespace NaiveWordCounter.Tests
 
 			//Act
 			var actualOutput = runner.GetResults(input);
-			var actualOutputTopTen = actualOutput.Take(10).OrderByDescending(v => v.Value);
+
+			//sort first by value, then by key, then take top 10 results
+			IDictionary<string, int> actualOutputSorted = actualOutput.OrderByDescending(x => x.Value).ThenBy(x => x.Key).Take(10).ToDictionary(i => i.Key, i => i.Value);
+			IDictionary<string, int> expectedOutputSorted = expectedOutput.OrderByDescending(x => x.Value).ThenBy(x => x.Key).ToDictionary(i => i.Key, i => i.Value);
 
 			//Assert
-			CollectionAssert.AreEquivalent(expectedOutputTopTen, actualOutputTopTen);
-
+			CollectionAssert.AreEquivalent(expectedOutputSorted, actualOutputSorted);
 		}
 
 		[Test]
-		public void GetTotal_ShouldReturnSummedDictionary_WhenPassedRawResults()
+		//Another integration test
+		public void GetResults_ShouldReturnCorrectCount_WhenPassedSentencesWithFullStops()
 		{
-			//I realised I was not summing the dictionary.
-			//The same word was counted twice if it was in different lines
-			var expectedOutput = new Dictionary<string, int>(){
-				{"hello", 3},
-				{"world", 4},
-				{"meerkat", 1}
+			//Arrange
+			var expectedOutput = new Dictionary<string, int>() { 
+				{"hello", 2},
+				{"world", 2},
+				{"im", 1},
+				{"testing", 1}
 			};
 
-			var wordCounter = new WordCounter();
-			var input = new string[3] { "hello world world", "hello hello world world world", "meerkat world" };
+			var runner = new Runner();
+			var input = "AFewSentences.txt";
 
 			//Act
-			var actualOutput = wordCounter.GetTotal(input);
+			var actualOutput = runner.GetResults(input);
+			var actualOutputSorted = actualOutput.OrderByDescending(x => x.Value);
 
-			//Arrange
-			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
+			//Assert
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutputSorted);
 		}
-
+	
 		[Test]
 		public void WordCounter_ShouldIgnorePunctuationAndNumbers_WhenPassedEnglishText()
 		{
