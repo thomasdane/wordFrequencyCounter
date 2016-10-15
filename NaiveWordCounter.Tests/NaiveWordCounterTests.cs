@@ -241,5 +241,27 @@ namespace NaiveWordCounter.Tests
 			//Assert
 			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
 		}
+
+		[Test]
+		public void IsPrime_ShouldReturnBoolean_WhenPassedListOfIntegers()
+		{
+			var expectedOutput = new Dictionary<int, bool>()
+			{
+				{1, true},
+				{2, true},
+				{3, true},
+				{4, false}, 
+				{97, true},
+				{98, false}
+			};
+			var input = new List<int>() { 1, 2, 3, 4, 97, 98 };
+			var primeNumberCalculator = new PrimeNumberCalculator();
+
+			//Act
+			var actualOutput = primeNumberCalculator.IsPrime(input);
+
+			//Assert
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
+		}
 	}
 }
