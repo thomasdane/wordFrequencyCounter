@@ -31,8 +31,10 @@ namespace NaiveWordCounter
 
 	public class PrimeNumberCalculator
 	{
-		public List<int> GetDistinctIntegers(IDictionary<string, int> WordCountResults){
-			return new List<int>() { 1, 2, 3 };
+		public List<int> GetDistinctIntegers(IDictionary<string, int> wordCountResults)
+		{
+			var result = wordCountResults.Values.Distinct().ToList();
+			return result;
 		}
 	}
 
