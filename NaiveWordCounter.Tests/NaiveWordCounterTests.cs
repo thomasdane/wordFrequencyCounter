@@ -219,5 +219,26 @@ namespace NaiveWordCounter.Tests
 			Assert.AreEqual(ExpectedChineseHelloWorld, ActualChineseHelloWorld);
 			Assert.AreEqual(ExpectedRussianHelloWorld, ActualRussianHelloWorld);
 		}
+
+		[Test]
+		public void GetDistinctValues_ShouldReturnDistinctValues_WhenPassedDictionary()
+		{
+			var expectedOutput = new List<int>(){ 1,2,3};
+			//when to use IDictionary vs Dictionary
+			var input = new Dictionary<string, int>()
+			{
+				{"foo", 1},
+				{"bar", 1},
+				{"meerkat", 2},
+				{"ivan", 3},
+				{"sergei", 3}
+			};
+
+			//Act
+			var actualOutput = GetDistinctIntegers(input);
+
+			//Assert
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
+		}
 	}
 }
