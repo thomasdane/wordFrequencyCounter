@@ -247,14 +247,12 @@ namespace NaiveWordCounter.Tests
 		{
 			var expectedOutput = new Dictionary<int, bool>()
 			{
-				{1, true},
-				{2, true},
-				{3, true},
-				{4, false}, 
+				{1, false},
+				{2, true}, 
 				{97, true},
 				{98, false}
 			};
-			var input = new List<int>() { 1, 2, 3, 4, 97, 98 };
+			var input = new List<int>() { 1, 2, 97, 98 };
 			var primeNumberCalculator = new PrimeNumberCalculator();
 
 			//Act

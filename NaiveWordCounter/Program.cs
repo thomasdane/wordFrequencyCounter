@@ -36,18 +36,34 @@ namespace NaiveWordCounter
 			var result = wordCountResults.Values.Distinct().ToList();
 			return result;
 		}
-
+	
 		public IDictionary<int, bool> IsPrime(IList<int> ListOfIntegers)
 		{
-			return new Dictionary<int, bool>()
+			var result = new Dictionary<int, bool>() { };
+			bool isPrime = false;
+
+			foreach (var integer in ListOfIntegers)
 			{
-				{1, true},
-				{2, true},
-				{3, true},
-				{4, false}, 
-				{97, true},
-				{98, false}
-			};
+				if (integer == 1) { isPrime = false; }
+				if (integer == 2) { isPrime = true; }
+				
+				var boundary = (int)Math.Floor(Math.Sqrt(integer));
+
+				for ( int i = 3; i <= boundary; ++i)
+				{
+					if (integer % i == 0)
+					{
+						isPrime = false;
+						break;
+					}
+					
+					isPrime = true;
+				}
+
+				result.Add(integer, isPrime);
+			}
+
+			return result;
 		}
 	}
 
