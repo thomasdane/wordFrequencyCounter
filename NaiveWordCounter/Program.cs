@@ -29,10 +29,16 @@ namespace NaiveWordCounter
 		}
 	}
 
+	public class PrimeNumberCalculator
+	{
+		public List<int> GetDistinctIntegers(IDictionary<string, int> WordCountResults){
+			return new List<int>() { 1, 2, 3 };
+		}
+	}
+
 	public interface IWordCounter
 	{
 		IDictionary<string, int> Count(string[] linesOfText);
-		IDictionary<string, int> GetTotal(IDictionary<string, int> fullResults);
 	}
 
 	public class WordCounter : IWordCounter

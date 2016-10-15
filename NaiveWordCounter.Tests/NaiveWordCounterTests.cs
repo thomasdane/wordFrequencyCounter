@@ -223,7 +223,7 @@ namespace NaiveWordCounter.Tests
 		[Test]
 		public void GetDistinctValues_ShouldReturnDistinctValues_WhenPassedDictionary()
 		{
-			var expectedOutput = new List<int>(){ 1,2,3};
+			var expectedOutput = new List<int>(){ 1,2,3 };
 			//when to use IDictionary vs Dictionary
 			var input = new Dictionary<string, int>()
 			{
@@ -233,9 +233,10 @@ namespace NaiveWordCounter.Tests
 				{"ivan", 3},
 				{"sergei", 3}
 			};
+			var primeNumberCalculator = new PrimeNumberCalculator();
 
 			//Act
-			var actualOutput = GetDistinctIntegers(input);
+			var actualOutput = primeNumberCalculator.GetDistinctIntegers(input);
 
 			//Assert
 			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
