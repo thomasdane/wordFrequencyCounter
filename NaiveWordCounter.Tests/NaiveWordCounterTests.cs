@@ -99,7 +99,7 @@ namespace NaiveWordCounter.Tests
 		}
 
 		[Test]
-		public void GetResults_ShouldReturnDictionary_WhenPassedSampleBook_WarAndPeace()
+		public void GetResults_ShouldReturnDictionary_WhenPassedWarAndPeace()
 		{
 			//Arrange
 			var expectedOutput = new Dictionary<string, int>() { };
@@ -112,6 +112,37 @@ namespace NaiveWordCounter.Tests
 			//Assert
 			CollectionAssert.IsNotEmpty(actualOutput);
 			CollectionAssert.AllItemsAreNotNull(actualOutput);
+		}
+
+		[Test]
+		//Another integration test
+		public void GetResults_ShouldReturnCorrectCount_WhenPassedThePlacesYoullGo()
+		{
+			//Arrange
+			var expectedOutputTopTen = new Dictionary<string, int>() { 
+				//I used http://www.writewords.org.uk/word_count.asp to verify the results
+				{"youll", 15},
+				{"go", 8},
+				{"youre", 5},
+				{"great", 5},
+				{"dont", 4},
+				{"know", 3},
+				{"happen", 3},
+				{"off", 3},
+				{"down", 3},
+				{"head", 3}
+			};
+			
+			var runner = new Runner();
+			var input = "ThePlacesYou'llGo.txt";
+
+			//Act
+			var actualOutput = runner.GetResults(input);
+			var actualOutputTopTen = actualOutput.Take(10).OrderByDescending(v => v.Value);
+
+			//Assert
+			CollectionAssert.AreEquivalent(expectedOutputTopTen, actualOutputTopTen);
+
 		}
 
 		[Test]
