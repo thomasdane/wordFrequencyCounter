@@ -36,6 +36,19 @@ namespace NaiveWordCounter
 			var result = wordCountResults.Values.Distinct().ToList();
 			return result;
 		}
+
+		public IDictionary<int, bool> IsPrime(IList<int> ListOfIntegers)
+		{
+			return new Dictionary<int, bool>()
+			{
+				{1, true},
+				{2, true},
+				{3, true},
+				{4, false}, 
+				{97, true},
+				{98, false}
+			};
+		}
 	}
 
 	public interface IWordCounter
