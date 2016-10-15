@@ -115,7 +115,7 @@ namespace NaiveWordCounter.Tests
 		}
 
 		[Test]
-		public void WordCounter_ShouldIgnorePunctuationAndNumbers_WhenPassedText()
+		public void WordCounter_ShouldIgnorePunctuationAndNumbers_WhenPassedEnglishText()
 		{
 			//Arrange
 			var expectedOutput = new Dictionary<string, int>(){
@@ -132,5 +132,25 @@ namespace NaiveWordCounter.Tests
 			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
 		}
 
+		[Test]
+		public void WordCounter_ShouldIgnorePunctuationAndNumbers_WhenTextInOtherLanguages()
+		{
+			//Arrange
+			var expectedOutput = new Dictionary<string, int>(){
+				{"hola", 1},
+				{"mundo", 1},
+				{"你好世界", 1},
+				{"Здравствулте", 1},
+				{"мир", 1}
+			};
+			var wordCounter = new WordCounter();
+			var input = new string[3] {"HOLA MUNDO!!!", "「你好世界」。", "—Здравствулте мир"};
+
+			//Act
+			var actualOutput = wordCounter.Count(input);
+
+			//Arrange
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
+		}
 	}
 }
