@@ -261,5 +261,40 @@ namespace NaiveWordCounter.Tests
 			//Assert
 			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
 		}
+
+		[Test]
+		//Another integration test
+		public void GetResults_ShouldReturnCorrectCount_WhenPassedThePlacesYoullGo()
+		{
+			//Arrange
+			//This is not needed for the test, but shows what the wordCount returns
+			//Leaving here for now to help visualise the test
+			var WordCountResult = new Dictionary<string, int>() { 
+				{"you", 22},
+				{"and", 16},
+				{"youll", 15},
+				{"your", 13},
+				{"to", 10},
+				{"the", 9},
+				{"go", 8},
+				{"be", 6},
+				{"of", 6},
+				{"great", 5}
+			};
+
+			var expectedOutput = new Dictionary<int, bool>(){
+				{13, true},
+				{5, true}
+			};
+
+			var runner = new Runner();
+			var input = "ThePlacesYou'llGo.txt";
+
+			//Act
+			var actualOutput = runner.GetPrimes(input);
+
+			//Assert
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
+		}
 	}
 }
