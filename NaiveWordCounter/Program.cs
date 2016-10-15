@@ -23,10 +23,8 @@ namespace NaiveWordCounter
 		{
 			var fileHandler = new FileHandler();
 			var content = fileHandler.ReadTextFile(fileName);
-
 			var wordCounter = new WordCounter();
 			var result = wordCounter.Count(content);
-
 			return result;
 		}
 	}
@@ -38,12 +36,7 @@ namespace NaiveWordCounter
 	}
 
 	public class WordCounter : IWordCounter
-	{
-		public IDictionary<string, int> GetTotal(IDictionary<string, int> fullResults)
-		{
-			return fullResults;
-		}
-		
+	{	
 		public IDictionary<string, int> Count(string[] linesOfText)
 		{
 			var result = new ConcurrentDictionary<string, int>();
@@ -70,8 +63,6 @@ namespace NaiveWordCounter
 			});
 
 			return result;
-			//var distinctResults = GetTotal(result);
-			//return distinctResults;
 		}
 	}
 
