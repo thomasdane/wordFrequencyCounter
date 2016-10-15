@@ -41,7 +41,7 @@ namespace NaiveWordCounter
 		public IDictionary<string, int> Count(string[] linesOfText)
 		{
 			var result = new ConcurrentDictionary<string, int>();
-			var regex = new Regex("[^a-zA-z]");
+			var regex = new Regex("[^\\p{L}.*]");
 
 			Parallel.For(0, linesOfText.Length, x =>
 			{

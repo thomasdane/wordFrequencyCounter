@@ -137,20 +137,31 @@ namespace NaiveWordCounter.Tests
 		{
 			//Arrange
 			var expectedOutput = new Dictionary<string, int>(){
-				{"hola", 1},
-				{"mundo", 1},
 				{"你好世界", 1},
-				{"Здравствулте", 1},
+				{"здравствулте", 1},
 				{"мир", 1}
 			};
 			var wordCounter = new WordCounter();
-			var input = new string[3] {"HOLA MUNDO!!!", "「你好世界」。", "—Здравствулте мир"};
+			var input = new string[2] { "「 你好世界 」。", "«здравствулте мир»" }; //Chinese and Russian with punctuation
 
 			//Act
 			var actualOutput = wordCounter.Count(input);
 
-			//Arrange
-			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
+			//Dictionaries are unordered. This can be solved by using a SortedDictionary
+			//My tests above rely on order, so might have problems. Jon Skeet discusses ordering here http://stackoverflow.com/questions/6384710/why-is-a-dictionary-not-ordered
+			var actualOutputSorted = new SortedDictionary<string, int>(actualOutput);
+			var expectedOutputSorted = new SortedDictionary<string, int>(expectedOutput);
+			
+			//Cannot simply compare two unicode strings. They need to be escaped. 
+			//More information: http://stackoverflow.com/questions/9461971/nunit-how-to-compare-strings-containing-composite-unicode-characters
+			var ExpectedChineseHelloWorld = System.Uri.UnescapeDataString(expectedOutputSorted.Keys.Last().ToString());
+			var ActualChineseHelloWorld = System.Uri.UnescapeDataString(actualOutputSorted.Keys.Last().ToString());
+			var ExpectedRussianHelloWorld = System.Uri.UnescapeDataString(expectedOutputSorted.Keys.First().ToString());
+			var ActualRussianHelloWorld = System.Uri.UnescapeDataString(actualOutputSorted.Keys.First().ToString());
+			
+			//Assert
+			Assert.AreEqual(ExpectedChineseHelloWorld, ActualChineseHelloWorld);
+			Assert.AreEqual(ExpectedRussianHelloWorld, ActualRussianHelloWorld);
 		}
 	}
 }

@@ -6,6 +6,7 @@ Optimizations and scaling
 
 
 2. Do we need to load entire book into memory? Could we parse it bit by bit? Discussion below. 
+- What if the book is in another language? I added unicode support and tests for non-latin alphabets. 
 
 Discussion: how to quickly read a large text file 
 
