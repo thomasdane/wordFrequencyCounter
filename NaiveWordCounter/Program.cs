@@ -13,12 +13,35 @@ namespace NaiveWordCounter
 	{
 		static void Main(string[] args)
 		{
+			var railWayChildren = "RailwayChildren.txt";
+			var comparetheTextFile = new CompareTheTextFile();
+			var results = comparetheTextFile.Compare(railWayChildren);
+			var count = results.Count() < 30 ? results.Count() : 30; //get the top 30 results
 
+			for (var i = 0; i < count; i++ )
+			{
+				Console.WriteLine(results[i]);
+			}
+
+			Console.ReadLine();
 		}
 	}
 
 	public class CompareTheTextFile
 	{
+		public CompareTheTextFile()
+		{
+		}
+
+		public IList<string> Compare(string textFile)
+		{
+			return new List<string>
+			{
+				"foo, 10, false", 
+				"meerkat, 7, true"
+			};
+		}
+		
 		public IDictionary<string, int> GetWordCount(string fileName)
 		{
 			var fileHandler = new FileHandler();
