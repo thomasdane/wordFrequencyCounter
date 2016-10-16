@@ -1,6 +1,30 @@
 Readme
 
 
+Requirements
+
+1. Write an application that outputs the individual words that appear in a book, and how many times that word appears in the text file.
+
+2. The second part is to also output whether the number of times each word appears is a prime number.
+
+ï¿½
+
+The following assumptions can be made:
+
+-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ignore punctuation and capitalisation
+
+-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½The code should compile and run on a machine with VS/Xamarin and NUnit
+
+
+It would be beneficial to:
+
+-come up with more than one solution and be able to talk about the pros and cons to each
+
+-ensure the application scales and performs optimally
+
+-Use TDD in the approach to writing the application
+
+[DRAFT]
 
 Optimizations and scaling
 
@@ -70,29 +94,6 @@ Long Books/Text Files
 - I included War and Peace as an example, but it is not the longest novel ever written. https://en.wikipedia.org/wiki/List_of_longest_novels
 So I copy and pasted the book twice into the one file, producing a book far longer than the longest ever book. 
 
-Requirements
-
-1. Write an application that outputs the individual words that appear in a book, and how many times that word appears in the text file.
-
-2. The second part is to also output whether the number of times each word appears is a prime number.
-
- 
-
-The following assumptions can be made:
-
--          Ignore punctuation and capitalisation
-
--          The code should compile and run on a machine with VS/Xamarin and NUnit
-
- 
-
-It would be beneficial to:
-
--          come up with more than one solution and be able to talk about the pro’s and con’s to each
-
--          ensure the application scales and performs optimally
-
--          Use TDD in the approach to writing the application
 
 Why do we only need to test up to the square root of a number to determine if it is prime? 
 
