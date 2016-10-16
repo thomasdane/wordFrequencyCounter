@@ -7,13 +7,12 @@ Requirements
 
 2. The second part is to also output whether the number of times each word appears is a prime number.
 
-�
 
 The following assumptions can be made:
 
--����������Ignore punctuation and capitalisation
+-Ignore punctuation and capitalisation
 
--����������The code should compile and run on a machine with VS/Xamarin and NUnit
+-The code should compile and run on a machine with VS/Xamarin and NUnit
 
 
 It would be beneficial to:
