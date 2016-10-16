@@ -13,50 +13,9 @@ namespace NaiveWordCounter.Tests.Integration
 	public class NaiveWordCounterIntegrationTests
 	{
 		[Test]
-		//this is more of an integration test, i will move to another project later.
-		public void GetResults_ShouldReturnDictionary_WhenPassedSampleBook_RailwayChildren()
+		public void CompareTheTextFile_ShouldReturnCorrectResult_WhenPassedWarAndPeace()
 		{
 			//Arrange
-			IFileReader fileReader = new FileReader();
-			IWordCounter wordCounter = new WordCounter();
-			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
-			IOutputGenerator outputGenerator = new OutputGenerator();
-			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
-
-			var expectedOutput = new Dictionary<string, int>() { };
-			var input = "RailwayChildren.txt";
-
-			//Act
-			var actualOutput = compareTheWords.Compare(input);
-
-			//Assert
-			CollectionAssert.IsNotEmpty(actualOutput);
-			CollectionAssert.AllItemsAreNotNull(actualOutput);
-		}
-
-		[Test]
-		public void GetResults_ShouldReturnDictionary_WhenPassedWarAndPeace()
-		{
-			//Arrange
-			IFileReader fileReader = new FileReader();
-			IWordCounter wordCounter = new WordCounter();
-			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
-			IOutputGenerator outputGenerator = new OutputGenerator();
-			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
-			var expectedOutput = new Dictionary<string, int>() { };			
-			var input = "WarAndPeace.txt";
-
-			//Act
-			var actualOutput = compareTheWords.Compare(input);
-
-			//Assert
-			CollectionAssert.IsNotEmpty(actualOutput);
-			CollectionAssert.AllItemsAreNotNull(actualOutput);
-		}
-
-		[Test]
-		public void CompareTheTextFile_ShouldReturnWordFrequencyAndIsPrime_WhenPassedWarAndPeace()
-		{
 			IFileReader fileReader = new FileReader();
 			IWordCounter wordCounter = new WordCounter();
 			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
@@ -71,16 +30,19 @@ namespace NaiveWordCounter.Tests.Integration
 				"of, 14990, False",
 				"a, 10513, True",
 			};
-
+			
+			//Act
 			var actualOutput = compareTheWords.Compare(input);
 			var actualOutputTop5 = actualOutput.Take(5).ToList();
 
+			//Assert
 			CollectionAssert.AreEquivalent(expectedOutput, actualOutputTop5);
 		}
 
 		[Test]
 		public void CompareTheTextFile_ShouldReturnWordFrequencyAndIsPrime_WhenPassedTwoCopiesOfWarAndPeace()
 		{
+			//Arrange
 			IFileReader fileReader = new FileReader();
 			IWordCounter wordCounter = new WordCounter();
 			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
@@ -96,73 +58,18 @@ namespace NaiveWordCounter.Tests.Integration
 				"a, 21026, False",
 			};
 
+			//Act
 			var actualOutput = compareTheWords.Compare(input);
 			var actualOutputTop5 = actualOutput.Take(5).ToList();
 
+			//Assert
 			CollectionAssert.AreEquivalent(expectedOutput, actualOutputTop5);
 		}
 
 		[Test]
-		//Another integration test
-		public void GetPrimes_ShouldReturnCorrectPrimes_WhenPassedThePlacesYoullGo()
+		public void CompareTheTextFile_ShouldReturnCorrectResults_WhenPassedRailwayChildren()
 		{
 			//Arrange
-			var input = new Dictionary<string, int>() { 
-				{"you", 22},
-				{"your", 13},
-				{"to", 10},
-				{"be", 7},
-				{"of", 6},
-				{"great", 5}
-			};
-
-			var expectedOutput = new Dictionary<int, bool>(){
-				{13, true},
-				{7, true},
-				{5, true}
-			};
-
-			IFileReader fileReader = new FileReader();
-			IWordCounter wordCounter = new WordCounter();
-			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
-			IOutputGenerator outputGenerator = new OutputGenerator();
-			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
-
-			//Act
-			var actualOutput = compareTheWords.GetPrimes(input);
-
-			//Assert
-			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
-		}
-
-		public void GetDinstinctIntegers_ShouldReturnUniqueList_WhenPassedDuplicates()
-		{
-			//Arrange
-			var input = new Dictionary<string, int>() { 
-				{"you", 22},
-				{"to", 10},
-				{"fro", 10},
-				{"to", 10},
-				{"be", 7},
-				{"to", 7},
-			};
-			var expectedOutput = new List<int>() { 12, 10, 7 };
-			IFileReader fileReader = new FileReader();
-			IWordCounter wordCounter = new WordCounter();
-			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
-			IOutputGenerator outputGenerator = new OutputGenerator();
-			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
-
-			//Act
-			var actualOutput = compareTheWords.GetPrimes(input);
-
-			//Assert
-			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
-		}
-
-		[Test]
-		public void CompareTheTextFile_ShouldReturnWordFrequencyAndIsPrime_WhenPassedRailwayChildren()
-		{
 			IFileReader fileReader = new FileReader();
 			IWordCounter wordCounter = new WordCounter();
 			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
@@ -178,9 +85,11 @@ namespace NaiveWordCounter.Tests.Integration
 				"said, 1141, False",
 			};
 
+			//Act
 			var actualOutput = compareTheWords.Compare(input);
 			var actualOutputTop5 = actualOutput.Take(5).ToList();
 
+			//Assert
 			CollectionAssert.AreEquivalent(expectedOutput, actualOutputTop5);
 		}
 
@@ -194,10 +103,9 @@ namespace NaiveWordCounter.Tests.Integration
 			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
 			IOutputGenerator outputGenerator = new OutputGenerator();
 			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
-			
 			var input = "ThePlacesYou'llGo.txt";
-			var expectedOutput = new List<string>() { 
-				//I used http://www.writewords.org.uk/word_count.asp to verify the results
+			var expectedOutput = new List<string>() //Used http://www.writewords.org.uk/word_count.asp to verify the results
+			{
 				"you, 22, False",
 				"and, 16, False",
 				"youll, 15, False",
@@ -207,7 +115,7 @@ namespace NaiveWordCounter.Tests.Integration
 				"go, 8, False",
 				"be, 6, False",
 				"of, 6, False",
-				"up, 5, True"
+				"great, 5, True"
 			};
 
 			//Act

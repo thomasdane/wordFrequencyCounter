@@ -44,18 +44,10 @@ namespace NaiveWordCounter
 		{		
 			var fileContent = _fileReader.ReadTextFile(fileName);
 			var wordCount = _wordCounter.Count(fileContent);
-			var primes = _primeNumberCalculator.GetPrimes(wordCount);
+			var primes = _primeNumberCalculator.CalculatePrimes(wordCount);
 			var output = _outputGenerator.GenerateOutput(wordCount, primes);
 
 			return output;
-		}
-
-		public IDictionary<int, bool> GetPrimes(IDictionary<string, int> wordCount)
-		{
-			var primeNumberCalculator = new PrimeNumberCalculator();
-			var integers = primeNumberCalculator.GetDistinctIntegers(wordCount);
-			var primes = primeNumberCalculator.GetListOfPrimes(integers);
-			return primes;
 		}
 	}
 }

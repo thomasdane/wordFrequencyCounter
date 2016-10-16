@@ -5,7 +5,7 @@ Readme
 Optimizations and scaling
 
 
-2. Do we need to load entire book into memory? Could we parse it bit by bit? Discussion below. 
+- Do we need to load entire book into memory? Could we parse it bit by bit? Discussion below. 
 - What if the book is in another language? I added unicode support and tests for non-latin alphabets. 
 - It is slower to output only the numbers in the list. Then you could use an Array or List where the index is the number and value is the boolean, like IsPrime = bool[]
 - so IsPrime[6] would be true, isPrime[7] would be false. It's slightly confusing because of zero indexed arrays.
@@ -21,15 +21,18 @@ I do not expect many lines in a book to be 25 GUIDs long like the author of that
 
 Parellism
 
-- I have not done much multithreading or parallel stuff before, beyong a 'hello world' out of curiosity. I wanted to dive deeper so read http://www.i-programmer.info/programming/c/1420-the-perils-of-the-c-parallel-for-.html
-- I don't think I will have race conditions. 
+- I have not done much multithreading or parallel stuff before, beyond a 'hello world' out of curiosity. I wanted to dive deeper so read http://www.i-programmer.info/programming/c/1420-the-perils-of-the-c-parallel-for-.html
 
 PRIMES
 
 I did a lot of research into the Sieve of Eratosthenes vs Sieve of Atkin, 
 before I realised I did not have to GENERATE primes! Only determine if an integer IS prime. 
 
-I wrote a very simple (slow) prime calculator. There are lots of ways to find primes fast, as discussed here: http://stackoverflow.com/questions/15743192/check-if-number-is-prime-number
+I wrote a very simple (slow) prime calculator. The worst part about it is it does not skip numbers
+that are multiples of numbers already tested. For example, once we know that the integer is not divisible by 5
+we do not need to check 10, 15, 20 and so on. There are lots of ways to find primes fast, as discussed here: http://stackoverflow.com/questions/15743192/check-if-number-is-prime-number
+
+- My algorithm to find primes is O(n**2) which is really bad. It has a for loop inside a for loop. 
 
 Another way might be to hardcode the list of primes and then check against them: 
 https://www.dotnetperls.com/prime
@@ -43,15 +46,24 @@ Notes
 - Concurrent Dictionary is a thread-safe dictionary http://geekswithblogs.net/blackrabbitcoder/archive/2011/02/17/c.net-little-wonders-the-concurrentdictionary.aspx
 - article about how string.split could create a large number of string objects if the line is long, and perhaps parsing by chars is faster http://stackoverflow.com/questions/8784517/counting-number-of-words-in-c-sharp
 - i need to benchmark this solution and my next one and compare them
+- using 
+http://www.writewords.org.uk/word_count.asp my results were different from Railway Children. Without seeing their code, it's hard to judge why. 
+However, both that site and myself get different results to http://www.textfixer.com/tools/online-word-counter.php#newText2. 
+It seems there is some variation in counting words. 
 
 Limitations and Extensions
 - What if we wanted to process multiple books at once? Could use more multithreading?
 - The brute force solution to that problem would be to spin this up on multiple instances and process 1 book per instance
+- Could run the .exe of AWS Lambda and have it run every time a new book is uploaded to S3. 
 - words with hyphens will have issues. they will be counted correctly, but display incorrectly. for example,
 free-for-all will be displayed as freeforall. 
 - I noticed online that some word frequency counters allow the user to exclude common words like 'the', 'to', 'and' etc. That would be a nice feature. 
 If the business/customer wanted it in the case of this application, it would be easy to create a list of such common words and exclude them from the results. 
 It may even speed up the app by excluding the most common results. 
+
+Extensions
+
+- testing for more edge cases and bad inputs. 
 
 Long Books/Text Files
 

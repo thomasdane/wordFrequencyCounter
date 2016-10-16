@@ -9,36 +9,39 @@ namespace NaiveWordCounter.Tests
 	[TestFixture]
     public class NaiveWordCounterUnitTests
     {
-		//I am going to be committing more than usual here. I want to show thought process. At work,
-		//I would prefer to rebase all of this into a single clean commit before merging to master. 
+		//I am going to be committing more than usual here. I want to show thought process. 
+		//At work, I would prefer to rebase into smaller clean commits before merging to master. 
 
+		//Normally each class would have its own test file, but for ease of review I'll keep them all here.
+ 		//FileReader Tests
 		[Test]
 		public void ReadTextFile_ShouldReturnText_WhenProvidedTxtFile()
 		{
 			//Arrange
-			var expectedOutput = "The quick brown fox";
-			var fileName = "SingleSentence.txt"; //TODO: rename this. 
 			var fileHandler = new FileReader();
+			var input = "SingleSentence.txt";
+			var expectedOutput = "The quick brown fox";
 
 			//Act
-			var actualOutput = fileHandler.ReadTextFile(fileName);  
+			var actualOutput = fileHandler.ReadTextFile(input);
+			var actualOutputString = actualOutput.First().ToString();
 
 			//Assert
-			Assert.AreEqual(expectedOutput, actualOutput.First().ToString()); //as this text file has only one line, this will suffice for now
+			Assert.AreEqual(expectedOutput, actualOutputString);
 		}
 
 		[Test]
 		public void ReadTextFile_ShouldReturnListOfLines_WhenProvidedLongerTextFile()
 		{
 			//Arrange
-			var fileName = "42LinesOfText.txt";
-			var expectedOutput = new string[42]; //I will have to develop a solution for very large books. 
+			var fileHandler = new FileReader();
+			var input = "42LinesOfText.txt";
+			var expectedOutput = new string[42]; 
 			var firstLine = "Lorem ipsum dolor sit amet";
 			var lastLine = "deserunt mollit anim id est laborum";
-			var fileHandler = new FileReader();
 
 			//Act
-			var actualOutput = fileHandler.ReadTextFile(fileName);
+			var actualOutput = fileHandler.ReadTextFile(input);
 
 			//Assert
 			Assert.AreEqual(expectedOutput.Length, actualOutput.Length);
@@ -65,16 +68,17 @@ namespace NaiveWordCounter.Tests
 			Assert.AreEqual(lastLine, actualOutput.Last().ToString());
 		}
 
+		//WordCounter Tests
 		[Test]
-		public void CountWords_ShouldReturnDictionaryOfCorrectNumbers_WhenPassedString()
+		public void CountWords_ShouldReturnDictionaryOfCorrectNumbers_WhenPassedStringArray()
 		{
 			//Arrange
+			var wordCounter = new WordCounter();
+			var input = new string[2] { "hello world world", "hello world world" };			
 			var expectedOutput = new Dictionary<string, int>(){
 				{"hello", 2},
 				{"world", 4}
 			};
-			var wordCounter = new WordCounter();
-			var input = new string[2] { "hello world world", "hello world world" };
 
 			//Act
 			var actualOutput = wordCounter.Count(input);
@@ -84,7 +88,7 @@ namespace NaiveWordCounter.Tests
 		}
 
 		[Test]
-		public void WordCounter_ShouldIgnorePunctuationAndNumbers_WhenPassedEnglishText()
+		public void CountWords_ShouldIgnorePunctuationAndNumbers_WhenPassedEnglishText()
 		{
 			//Arrange
 			var expectedOutput = new Dictionary<string, int>(){
@@ -105,29 +109,23 @@ namespace NaiveWordCounter.Tests
 		public void WordCounter_ShouldIgnorePunctuationAndNumbers_WhenTextInOtherLanguages()
 		{
 			//Arrange
-			var expectedOutput = new Dictionary<string, int>(){
-				{"你好世界", 1},
-				{"здравствулте", 1},
-				{"мир", 1}
-			};
 			var wordCounter = new WordCounter();
-			var input = new string[2] { "「 你好世界 」。", "«здравствулте мир»" }; //Chinese and Russian with punctuation
+			var input = new string[2] { "«здравствулте мир»", "「你好世界」。"}; //'Hello World' in Chinese and Russian, with native punctuation
+			var expectedOutput = new Dictionary<string, int>(){
+				{"здравствулте", 1},
+				{"мир", 1},
+				{"你好世界", 1}
+			};
 
 			//Act
 			var actualOutput = wordCounter.Count(input);
-
-			//Dictionaries are unordered. This can be solved by using a SortedDictionary
-			//My tests above rely on order, so might have problems. Jon Skeet discusses ordering here http://stackoverflow.com/questions/6384710/why-is-a-dictionary-not-ordered
-			var actualOutputSorted = new SortedDictionary<string, int>(actualOutput);
-			var expectedOutputSorted = new SortedDictionary<string, int>(expectedOutput);
-			
-			//Cannot simply compare two unicode strings. They need to be escaped. 
+			//One does not simply compare two unicode strings. They need to be escaped. 
 			//More information: http://stackoverflow.com/questions/9461971/nunit-how-to-compare-strings-containing-composite-unicode-characters
-			var ExpectedChineseHelloWorld = System.Uri.UnescapeDataString(expectedOutputSorted.Keys.Last().ToString());
-			var ActualChineseHelloWorld = System.Uri.UnescapeDataString(actualOutputSorted.Keys.Last().ToString());
-			var ExpectedRussianHelloWorld = System.Uri.UnescapeDataString(expectedOutputSorted.Keys.First().ToString());
-			var ActualRussianHelloWorld = System.Uri.UnescapeDataString(actualOutputSorted.Keys.First().ToString());
-			
+			var ActualChineseHelloWorld = System.Uri.UnescapeDataString(actualOutput.Keys.Last().ToString());
+			var ActualRussianHelloWorld = System.Uri.UnescapeDataString(actualOutput.Keys.First().ToString());
+			var ExpectedChineseHelloWorld = System.Uri.UnescapeDataString(expectedOutput.Keys.Last().ToString());
+			var ExpectedRussianHelloWorld = System.Uri.UnescapeDataString(expectedOutput.Keys.First().ToString());
+
 			//Assert
 			Assert.AreEqual(ExpectedChineseHelloWorld, ActualChineseHelloWorld);
 			Assert.AreEqual(ExpectedRussianHelloWorld, ActualRussianHelloWorld);
@@ -136,15 +134,14 @@ namespace NaiveWordCounter.Tests
 		[Test]
 		public void WordCounter_ShouldReturnCorrectCount_WhenPassedSentencesWithFullStops()
 		{
+			//Regression test to address issue with full stops. 
 			//Arrange
 			var wordCounter = new WordCounter();
-
 			var input = new string[]{
 				"hello world!",
 				"hello world.",
 				"Let's test."
 			};
-
 			var expectedOutput = new Dictionary<string, int>() { 
 				{"hello", 2},
 				{"world", 2},
@@ -154,17 +151,17 @@ namespace NaiveWordCounter.Tests
 
 			//Act
 			var actualOutput = wordCounter.Count(input);
-			var actualOutputSorted = actualOutput.OrderByDescending(x => x.Value);
 
 			//Assert
-			CollectionAssert.AreEquivalent(expectedOutput, actualOutputSorted);
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
 		}
 
+		//Prime Number Calculator Tests
 		[Test]
-		public void GetDistinctValues_ShouldReturnDistinctValues_WhenPassedDictionary()
+		public void GetDinstinctIntegers_ShouldReturnDistinctValues_WhenPassedDictionary()
 		{
-			var expectedOutput = new List<int>(){ 1,2,3 };
-			//when to use IDictionary vs Dictionary
+			//Arrange
+			var primeNumberCalculator = new PrimeNumberCalculator();
 			var input = new Dictionary<string, int>()
 			{
 				{"foo", 1},
@@ -173,7 +170,7 @@ namespace NaiveWordCounter.Tests
 				{"ivan", 3},
 				{"sergei", 3}
 			};
-			var primeNumberCalculator = new PrimeNumberCalculator();
+			var expectedOutput = new List<int>(){ 1,2,3 };		
 
 			//Act
 			var actualOutput = primeNumberCalculator.GetDistinctIntegers(input);
@@ -182,8 +179,29 @@ namespace NaiveWordCounter.Tests
 			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
 		}
 
+		public void GetDinstinctIntegers_ShouldReturnUniqueList_WhenPassedDuplicates()
+		{
+			//Arrange
+			var primeNumberCalculator = new PrimeNumberCalculator();
+			var input = new Dictionary<string, int>() { 
+				{"you", 22},
+				{"to", 10},
+				{"fro", 10},
+				{"to", 10},
+				{"be", 7},
+				{"to", 7},
+			};
+			var expectedOutput = new List<int>() { 12, 10, 7 };
+			
+			//Act
+			var actualOutput = primeNumberCalculator.GetDistinctIntegers(input);
+
+			//Assert
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
+		}
+
 		[Test]
-		public void GetListOfPrimes_ShouldReturnBoolean_WhenPassedListOfIntegers()
+		public void GetListOfPrimes_ShouldReturnCorrectBooleans_WhenPassedListOfIntegers()
 		{
 			//Arrange
 			var input = new List<int>() { 1, 2, 97, 98 };
@@ -202,21 +220,78 @@ namespace NaiveWordCounter.Tests
 		}
 
 		[Test]
-		public void OutputGenerator_ShouldGenerateListOfStrings_WhenPassedWordCountResultsAndPrimes()
+		public void IsPrime_ShouldReturnTrue_WhenPassedKnownPrimes(
+			[Values(2, 3, 5, 47, 409, 4003)] int input)
 		{
+			//Arrange
+			var primeNumberCalculator = new PrimeNumberCalculator();
+			var expectedOutput = true;
+
+			//Act
+			var actualOutput = primeNumberCalculator.IsPrime(input);
+
+			//Assert
+			Assert.AreEqual(expectedOutput, actualOutput);
+		}
+
+		[Test]
+		public void IsPrime_ShouldReturnFalse_WhenPassedKnownNonPrimes(
+			[Values(1, 4, 50, 1738, 4004)] int input)
+		{
+			//Arrange
+			var primeNumberCalculator = new PrimeNumberCalculator();
+			var expectedOutput = false;
+
+			//Act
+			var actualOutput = primeNumberCalculator.IsPrime(input);
+
+			//Assert
+			Assert.AreEqual(expectedOutput, actualOutput);
+		}
+
+		[Test]
+		public void GetPrimes_ShouldReturnCorrectPrimes_WhenPassedValidWordCount()
+		{
+			//Arrange
+			var primeNumberCalculator = new PrimeNumberCalculator();
+			var input = new Dictionary<string, int>() { 
+				{"you", 22},
+				{"your", 13},
+				{"to", 10},
+				{"be", 7},
+				{"of", 6},
+				{"great", 5}
+			};
+			var expectedOutput = new Dictionary<int, bool>(){
+				{13, true},
+				{7, true},
+				{5, true}
+			};
+
+			//Act
+			var actualOutput = primeNumberCalculator.CalculatePrimes(input);
+
+			//Assert
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
+		}
+
+		//Output Generator tests
+		[Test]
+		public void OutputGenerator_ShouldGenerateListOfStrings_WhenPassedWordCountAndPrimes()
+		{
+			//Arrange
+			var outputGenerator = new OutputGenerator();
 			var wordCountResults = new Dictionary<string, int>() { 
 				{"compare", 22},
 				{"the", 13},
 				{"market", 10},
 				{"codeTest", 7},
 			};
-
 			var listOfPrimes = new Dictionary<int, bool>(){
 				{13, true},
 				{7, true},
 				{5, true}
 			};
-
 			var expectedOutput = new List<string>
 			{
 				"compare, 22, False", 
@@ -225,9 +300,10 @@ namespace NaiveWordCounter.Tests
 				"codeTest, 7, True",
 			};
 
-			var outputGenerator = new OutputGenerator();
+			//Act
 			var actualOutput = outputGenerator.GenerateOutput(wordCountResults, listOfPrimes);
 
+			//Assert
 			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
 		}
 	}

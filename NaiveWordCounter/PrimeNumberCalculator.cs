@@ -9,17 +9,17 @@ namespace NaiveWordCounter
 {
 	public class PrimeNumberCalculator : IPrimeNumberCalculator
 	{
-		public List<int> GetDistinctIntegers(IDictionary<string, int> wordCountResults)
-		{
-			var result = wordCountResults.Values.Distinct().ToList();
-			return result;
-		}
-
-		public IDictionary<int, bool> GetPrimes(IDictionary<string, int> wordCountResults)
+		public IDictionary<int, bool> CalculatePrimes(IDictionary<string, int> wordCountResults)
 		{
 			var distinctIntegers = GetDistinctIntegers(wordCountResults);
 			var listOfPrimes = GetListOfPrimes(distinctIntegers);
 			return listOfPrimes;
+		}
+		
+		public List<int> GetDistinctIntegers(IDictionary<string, int> wordCountResults)
+		{
+			var result = wordCountResults.Values.Distinct().ToList();
+			return result;
 		}
 
 		public IDictionary<int, bool> GetListOfPrimes(IList<int> ListOfIntegers)
@@ -39,14 +39,9 @@ namespace NaiveWordCounter
 
 		public bool IsPrime(int integer)
 		{
-			//this is the most naive way to find primes
-			//most obviously, it loops through all numbers, even if we can discount them
-			//for example, once we know that the integer is not divisible by 5
-			//we do not need to check 10, 15, 20 and so on
 			if (integer == 1) return false;
 			if (integer == 2) return true;
-
-			if (integer % 2 == 0) return false; //Even number     
+			if (integer % 2 == 0) return false; //Even numbers   
 
 			for (int i = 3; i < integer; i += 2)
 			{
