@@ -41,7 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileHandler.cs" />
+    <Compile Include="FileReader.cs" />
+    <Compile Include="Interfaces\IFileReader.cs" />
     <Compile Include="OutputGenerator.cs" />
     <Compile Include="PrimeNumberCalculator.cs" />
     <Compile Include="Program.cs" />
@@ -52,14 +53,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Books\42LinesOfText.txt" />
-    <Content Include="Books\AFewSentences.txt" />
-    <Content Include="Books\HelloWorld.txt" />
     <Content Include="Books\RailwayChildren.txt" />
-    <Content Include="Books\SingleSentence.txt" />
-    <Content Include="Books\ThePlacesYou%27llGo.txt" />
-    <Content Include="Books\VerySmallBook.txt" />
-    <Content Include="Books\WarAndPeace.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

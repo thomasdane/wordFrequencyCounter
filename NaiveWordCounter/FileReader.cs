@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using NaiveWordCounter.Interfaces;
 
 namespace NaiveWordCounter
 {
-	public class FileReader
+	public class FileReader : IFileReader
 	{
 		public string[] ReadTextFile(string fileName)
 		{

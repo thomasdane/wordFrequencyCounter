@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using NaiveWordCounter.Interfaces;
 
 namespace NaiveWordCounter
 {
@@ -9,7 +10,10 @@ namespace NaiveWordCounter
 	{
 		static void Main(string[] args)
 		{
-			var compareTheWords = new CompareTheWords();
+			IFileReader fileReader = new FileReader();
+
+			var compareTheWords = new CompareTheWords(fileReader);
+
 			var results = compareTheWords.Compare("RailwayChildren.txt");
 			var top10Results = results.Take(10).ToList<string>(); 
 
@@ -20,10 +24,17 @@ namespace NaiveWordCounter
 
 	public class CompareTheWords
 	{
+		protected readonly IFileReader _fileReader;
+
+		public CompareTheWords(IFileReader fileReader)
+		{
+			_fileReader = fileReader;
+		}
+		
 		public List<string> Compare(string textFile)
 		{
-			var fileHandler = new FileReader();
-			var content = fileHandler.ReadTextFile(textFile);
+			
+			var content = _fileReader.ReadTextFile(textFile);
 
 			var wordCounter = new WordCounter();
 			var wordCount = wordCounter.Count(content);
