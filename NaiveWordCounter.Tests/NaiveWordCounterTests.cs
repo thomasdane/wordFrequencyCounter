@@ -345,10 +345,10 @@ namespace NaiveWordCounter.Tests
 
 			var expectedOutput = new List<string>
 			{
-				"compare, 22, false", 
-				"the, 13, true",
-				"market, 10, false", 
-				"codeTest, 7, true",
+				"compare, 22, False", 
+				"the, 13, True",
+				"market, 10, False", 
+				"codeTest, 7, True",
 			};
 
 			var outputGenerator = new OutputGenerator();

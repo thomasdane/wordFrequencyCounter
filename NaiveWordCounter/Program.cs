@@ -24,15 +24,22 @@ namespace NaiveWordCounter
 
 	public class OutputGenerator
 	{
-		public IList<string> GenerateOutput(IDictionary<string, int> wordCountResults, IDictionary<int, bool> ListOfPrimes)
+		public List<string> GenerateOutput(IDictionary<string, int> wordCountResults, IDictionary<int, bool> ListOfPrimes)
 		{
-			return new List<string>
-			{
-				"compare, 22, false", 
-				"the, 13, true",
-				"market, 10, false", 
-				"codeTest, 7, true",
-			};
+			var output = new List<string> { };
+			bool isPrime;
+
+			foreach(KeyValuePair<string, int> wordCount in wordCountResults){
+
+				//is the word count number present in the list of primes? 
+				isPrime = ListOfPrimes.Keys.Contains(wordCount.Value) ? true : false;
+
+				var formattedString = String.Format("{0}, {1}, {2}", wordCount.Key.ToString(), wordCount.Value.ToString(), isPrime.ToString());
+
+				output.Add(formattedString);			
+			}
+
+			return output;
 		}
 	}
 
@@ -47,7 +54,7 @@ namespace NaiveWordCounter
 			var wordCount = wordCounter.Count(content);
 
 			var primeNumberCalculator = new PrimeNumberCalculator();
-			var results = primeNumberCalculator.GetPrimes(wordCount);
+			var primes = primeNumberCalculator.GetPrimes(wordCount);
 
 			//output i want is "foo, 7, true"
 			return new List<string>
