@@ -87,7 +87,7 @@ namespace NaiveWordCounter.Tests
 		{
 			//Arrange
 			var expectedOutput = new Dictionary<string, int>() { };
-			var runner = new Runner();
+			var runner = new CompareTheTextFile();
 			var input = "RailwayChildren.txt";
 
 			//Act
@@ -103,7 +103,7 @@ namespace NaiveWordCounter.Tests
 		{
 			//Arrange
 			var expectedOutput = new Dictionary<string, int>() { };
-			var runner = new Runner();
+			var runner = new CompareTheTextFile();
 			var input = "WarAndPeace.txt";
 
 			//Act
@@ -133,7 +133,7 @@ namespace NaiveWordCounter.Tests
 				{"great", 5}
 			};
 			
-			var runner = new Runner();
+			var runner = new CompareTheTextFile();
 			var input = "ThePlacesYou'llGo.txt";
 
 			//Act
@@ -159,7 +159,7 @@ namespace NaiveWordCounter.Tests
 				{"testing", 1}
 			};
 
-			var runner = new Runner();
+			var runner = new CompareTheTextFile();
 			var input = "AFewSentences.txt";
 
 			//Act
@@ -268,12 +268,8 @@ namespace NaiveWordCounter.Tests
 			//Arrange
 			var input = new Dictionary<string, int>() { 
 				{"you", 22},
-				{"and", 16},
-				{"youll", 15},
 				{"your", 13},
 				{"to", 10},
-				{"the", 10},
-				{"go", 8},
 				{"be", 7},
 				{"of", 6},
 				{"great", 5}
@@ -285,12 +281,49 @@ namespace NaiveWordCounter.Tests
 				{5, true}
 			};
 
-			var runner = new Runner();
+			var runner = new CompareTheTextFile();
 
 			//Act
 			var actualOutput = runner.GetPrimes(input);
 
 			//Assert
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
+		}
+
+		public void GetDinstinctIntegers_ShouldReturnUniqueList_WhenPassedDuplicates()
+		{
+			//Arrange
+			var input = new Dictionary<string, int>() { 
+				{"you", 22},
+				{"to", 10},
+				{"fro", 10},
+				{"to", 10},
+				{"be", 7},
+				{"to", 7},
+			};
+			var expectedOutput = new List<int>(){ 12, 10, 7};
+			var runner = new CompareTheTextFile();
+
+			//Act
+			var actualOutput = runner.GetPrimes(input);
+
+			//Assert
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
+		}
+
+		[Test]
+		public void CompareTheTextFile_ShouldReturnWordFrequencyAndIsPrime_WhenPassedRailwayChildren()
+		{
+			var compareTheTextFile = new CompareTheTextFile();
+			var input = "RailwayChildren.txt";
+			var expectedOutput = new string[]
+			{
+				"foo, 10, false", 
+				"meerkat, 7, true"
+			};
+
+			var actualOutput = compareTheTextFile.Compare(input);
+
 			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
 		}
 	}

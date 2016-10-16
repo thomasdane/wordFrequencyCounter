@@ -17,7 +17,7 @@ namespace NaiveWordCounter
 		}
 	}
 
-	public class Runner
+	public class CompareTheTextFile
 	{
 		public IDictionary<string, int> GetWordCount(string fileName)
 		{
