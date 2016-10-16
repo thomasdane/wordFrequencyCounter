@@ -14,3 +14,7 @@ C:\git\NaiveWordCounter\NaiveWordCounter.Tests\bin\Debug\nunit.framework.dll
 C:\git\NaiveWordCounter\NaiveWordCounter.Tests\bin\Debug\NUnit3.TestAdapter.dll
 C:\git\NaiveWordCounter\NaiveWordCounter.Tests\bin\Debug\NaiveWordCounter.pdb
 C:\git\NaiveWordCounter\NaiveWordCounter.Tests\bin\Debug\nunit.framework.xml
+C:\git\NaiveWordCounter\NaiveWordCounter.Tests\bin\Debug\Castle.Core.dll
+C:\git\NaiveWordCounter\NaiveWordCounter.Tests\bin\Debug\Moq.dll
+C:\git\NaiveWordCounter\NaiveWordCounter.Tests\bin\Debug\Castle.Core.xml
+C:\git\NaiveWordCounter\NaiveWordCounter.Tests\bin\Debug\Moq.xml

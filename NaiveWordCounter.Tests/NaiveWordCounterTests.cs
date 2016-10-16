@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using NaiveWordCounter.Interfaces;
+using Moq;
 
 namespace NaiveWordCounter.Tests
 {
 	[TestFixture]
-    public class NaiveWordCounterTests
+    public class NaiveWordCounterUnitTests
     {
 		//I am going to be committing more than usual here. I want to show thought process. At work,
 		//I would prefer to rebase all of this into a single clean commit before merging to master. 
@@ -129,6 +131,33 @@ namespace NaiveWordCounter.Tests
 			//Assert
 			Assert.AreEqual(ExpectedChineseHelloWorld, ActualChineseHelloWorld);
 			Assert.AreEqual(ExpectedRussianHelloWorld, ActualRussianHelloWorld);
+		}
+
+		[Test]
+		public void WordCounter_ShouldReturnCorrectCount_WhenPassedSentencesWithFullStops()
+		{
+			//Arrange
+			var wordCounter = new WordCounter();
+
+			var input = new string[]{
+				"hello world!",
+				"hello world.",
+				"Let's test."
+			};
+
+			var expectedOutput = new Dictionary<string, int>() { 
+				{"hello", 2},
+				{"world", 2},
+				{"lets", 1},
+				{"test", 1}
+			};
+
+			//Act
+			var actualOutput = wordCounter.Count(input);
+			var actualOutputSorted = actualOutput.OrderByDescending(x => x.Value);
+
+			//Assert
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutputSorted);
 		}
 
 		[Test]

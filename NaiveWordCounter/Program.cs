@@ -50,15 +50,6 @@ namespace NaiveWordCounter
 			return output;
 		}
 
-		public IDictionary<string, int> GetWordCount(string fileName)
-		{
-			var fileHandler = new FileReader();
-			var content = fileHandler.ReadTextFile(fileName);
-			var wordCounter = new WordCounter();
-			var result = wordCounter.Count(content);
-			return result;
-		}
-
 		public IDictionary<int, bool> GetPrimes(IDictionary<string, int> wordCount)
 		{
 			var primeNumberCalculator = new PrimeNumberCalculator();

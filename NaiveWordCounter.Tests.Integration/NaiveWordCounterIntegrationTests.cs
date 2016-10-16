@@ -55,33 +55,6 @@ namespace NaiveWordCounter.Tests.Integration
 		}
 
 		[Test]
-		//Another integration test
-		public void GetResults_ShouldReturnCorrectCount_WhenPassedSentencesWithFullStops()
-		{
-			//Arrange
-			var expectedOutput = new Dictionary<string, int>() { 
-				{"hello", 2},
-				{"world", 2},
-				{"im", 1},
-				{"testing", 1}
-			};
-
-			IFileReader fileReader = new FileReader();
-			IWordCounter wordCounter = new WordCounter();
-			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
-			IOutputGenerator outputGenerator = new OutputGenerator();
-			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
-			var input = "AFewSentences.txt";
-
-			//Act
-			var actualOutput = compareTheWords.GetWordCount(input);
-			var actualOutputSorted = actualOutput.OrderByDescending(x => x.Value);
-
-			//Assert
-			CollectionAssert.AreEquivalent(expectedOutput, actualOutputSorted);
-		}
-
-		[Test]
 		public void CompareTheTextFile_ShouldReturnWordFrequencyAndIsPrime_WhenPassedWarAndPeace()
 		{
 			IFileReader fileReader = new FileReader();
@@ -216,36 +189,32 @@ namespace NaiveWordCounter.Tests.Integration
 		public void GetResults_ShouldReturnCorrectCount_WhenPassedThePlacesYoullGo()
 		{
 			//Arrange
-			var expectedOutput = new Dictionary<string, int>() { 
-				//I used http://www.writewords.org.uk/word_count.asp to verify the results
-				{"you", 22},
-				{"and", 16},
-				{"youll", 15},
-				{"your", 13},
-				{"to", 10},
-				{"the", 9},
-				{"go", 8},
-				{"be", 6},
-				{"of", 6},
-				{"great", 5}
-			};
-
 			IFileReader fileReader = new FileReader();
 			IWordCounter wordCounter = new WordCounter();
 			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
 			IOutputGenerator outputGenerator = new OutputGenerator();
 			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
+			
 			var input = "ThePlacesYou'llGo.txt";
+			var expectedOutput = new List<string>() { 
+				//I used http://www.writewords.org.uk/word_count.asp to verify the results
+				"you, 22, False",
+				"and, 16, False",
+				"youll, 15, False",
+				"your, 13, True",
+				"to, 10, False",
+				"the, 9, False",
+				"go, 8, False",
+				"be, 6, False",
+				"of, 6, False",
+				"up, 5, True"
+			};
 
 			//Act
-			var actualOutput = compareTheWords.GetWordCount(input);
-
-			//sort first by value, then by key, then take top 10 results
-			IDictionary<string, int> actualOutputSorted = actualOutput.OrderByDescending(x => x.Value).ThenBy(x => x.Key).Take(10).ToDictionary(i => i.Key, i => i.Value);
-			IDictionary<string, int> expectedOutputSorted = expectedOutput.OrderByDescending(x => x.Value).ThenBy(x => x.Key).ToDictionary(i => i.Key, i => i.Value);
+			var actualOutput = compareTheWords.Compare(input);
 
 			//Assert
-			CollectionAssert.AreEquivalent(expectedOutputSorted, actualOutputSorted);
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutput.Take(10));
 		}
 	}
 }
