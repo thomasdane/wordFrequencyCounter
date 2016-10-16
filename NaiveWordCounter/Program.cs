@@ -28,8 +28,10 @@ namespace NaiveWordCounter
 		{
 			return new List<string>
 			{
-				"foo, 10, false", 
-				"meerkat, 7, true"
+				"compare, 22, false", 
+				"the, 13, true",
+				"market, 10, false", 
+				"codeTest, 7, true",
 			};
 		}
 	}
