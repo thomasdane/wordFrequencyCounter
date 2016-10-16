@@ -8,7 +8,9 @@ Optimizations and scaling
 2. Do we need to load entire book into memory? Could we parse it bit by bit? Discussion below. 
 - What if the book is in another language? I added unicode support and tests for non-latin alphabets. 
 - It is slower to output only the numbers in the list. Then you could use an Array or List where the index is the number and value is the boolean, like IsPrime = bool[]
-- so IsPrime[6] would be true, isPrime[7] would be false. It's slightly confusing because of zero indexed arrays. 
+- so IsPrime[6] would be true, isPrime[7] would be false. It's slightly confusing because of zero indexed arrays.
+- what if someone enters a book that we have already computed? It would be good to save results to a database, 
+and when someone enters a book name, we can first lookup the database to check if we have the results saved.  
 
 Discussion: how to quickly read a large text file 
 
@@ -23,23 +25,18 @@ Parellism
 - I don't think I will have race conditions. 
 
 PRIMES
-Trial Division vs Sieve of Eratosthenes vs Sieve of Atkin vs Sieve of Sundaram
 
-Trial division does futile work by dividing primes, the sieve does futile work by repeatedly crossing off composites. There are relatively few primes, but many composites, so one might be tempted to think trial division wastes less work.
-But: Composites have only few distinct prime factors, while there are many primes below sqrt(p).
-http://stackoverflow.com/questions/5649068/why-is-sieve-of-eratosthenes-more-efficient-than-the-simple-dumb-algorithm
-
-The sieve of Sundaram has an arithmetic complexity O(n log n).
-The basic sieve of Eratosthenes has arithmetic complexity O(n log log n).
-Optimized variants of the sieve of Eratosthenes have arithmetic complexity O(n).
-The sieve of Atkin has not only arithmetic but also bit complexity O(n/log log n).
-In practice, the sieve of Sundaram is so slow that no one uses it, and the sieve of Atkin is slower than optimized Eratosthenes variants (although it's at least competitive). Perhaps one day Atkin or something else will displace Eratosthenes but it's not likely to happen soon. (Also, there's no such thing as magic.)
+I did a lot of research into the Sieve of Eratosthenes vs Sieve of Atkin, 
+before I realised I did not have to GENERATE primes! Only determine if an integer IS prime. 
 
 The example I used for the sieve was here and some talk of optimisation
 http://codereview.stackexchange.com/questions/6115/sieve-of-eratosthenes-in-c-with-linq
 
 Another better solution is to hardcode the list of primes and then check against them: 
 https://www.dotnetperls.com/prime
+
+Another great discussion of finding primes fast is here:
+http://stackoverflow.com/questions/15743192/check-if-number-is-prime-number
 
 Notes
 

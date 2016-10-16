@@ -19,13 +19,21 @@ namespace NaiveWordCounter
 
 	public class Runner
 	{
-		public IDictionary<string, int> GetResults(string fileName)
+		public IDictionary<string, int> GetWordCount(string fileName)
 		{
 			var fileHandler = new FileHandler();
 			var content = fileHandler.ReadTextFile(fileName);
 			var wordCounter = new WordCounter();
 			var result = wordCounter.Count(content);
 			return result;
+		}
+
+		public IDictionary<int, bool> GetPrimes(IDictionary<string, int> wordCount)
+		{
+			var primeNumberCalculator = new PrimeNumberCalculator();
+			var integers = primeNumberCalculator.GetDistinctIntegers(wordCount);
+			var primes = primeNumberCalculator.GetListOfPrimes(integers);
+			return primes;
 		}
 	}
 
@@ -36,34 +44,39 @@ namespace NaiveWordCounter
 			var result = wordCountResults.Values.Distinct().ToList();
 			return result;
 		}
-	
-		public IDictionary<int, bool> IsPrime(IList<int> ListOfIntegers)
+
+		public IDictionary<int, bool> GetListOfPrimes(IList<int> ListOfIntegers)
 		{
 			var result = new Dictionary<int, bool>() { };
-			bool isPrime = false;
 
 			foreach (var integer in ListOfIntegers)
 			{
-				if (integer == 1) { isPrime = false; }
-				if (integer == 2) { isPrime = true; }
-				
-				var boundary = (int)Math.Floor(Math.Sqrt(integer));
-
-				for ( int i = 3; i <= boundary; ++i)
+				if (IsPrime(integer))
 				{
-					if (integer % i == 0)
-					{
-						isPrime = false;
-						break;
-					}
-					
-					isPrime = true;
+					result.Add(integer, true);
 				}
-
-				result.Add(integer, isPrime);
 			}
 
 			return result;
+		}
+	
+		public bool IsPrime(int integer)
+		{
+			//this is the most naive way to find primes
+			//most obviously, it loops through all numbers, even if we can discount them
+			//for example, once we know that the integer is not divisible by 5
+			//we do not need to check 10, 15, 20 and so on
+			if (integer == 1) return false;
+			if (integer == 2) return true;
+
+			if (integer % 2 == 0) return false; //Even number     
+
+			for (int i = 3; i < integer; i += 2)
+			{
+				if (integer % i == 0) return false;
+			}
+
+			return true;
 		}
 	}
 

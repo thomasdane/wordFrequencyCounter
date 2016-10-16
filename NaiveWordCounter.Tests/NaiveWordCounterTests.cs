@@ -91,7 +91,7 @@ namespace NaiveWordCounter.Tests
 			var input = "RailwayChildren.txt";
 
 			//Act
-			var actualOutput = runner.GetResults(input);
+			var actualOutput = runner.GetWordCount(input);
 
 			//Assert
 			CollectionAssert.IsNotEmpty(actualOutput);
@@ -107,7 +107,7 @@ namespace NaiveWordCounter.Tests
 			var input = "WarAndPeace.txt";
 
 			//Act
-			var actualOutput = runner.GetResults(input);
+			var actualOutput = runner.GetWordCount(input);
 
 			//Assert
 			CollectionAssert.IsNotEmpty(actualOutput);
@@ -137,7 +137,7 @@ namespace NaiveWordCounter.Tests
 			var input = "ThePlacesYou'llGo.txt";
 
 			//Act
-			var actualOutput = runner.GetResults(input);
+			var actualOutput = runner.GetWordCount(input);
 
 			//sort first by value, then by key, then take top 10 results
 			IDictionary<string, int> actualOutputSorted = actualOutput.OrderByDescending(x => x.Value).ThenBy(x => x.Key).Take(10).ToDictionary(i => i.Key, i => i.Value);
@@ -163,7 +163,7 @@ namespace NaiveWordCounter.Tests
 			var input = "AFewSentences.txt";
 
 			//Act
-			var actualOutput = runner.GetResults(input);
+			var actualOutput = runner.GetWordCount(input);
 			var actualOutputSorted = actualOutput.OrderByDescending(x => x.Value);
 
 			//Assert
@@ -243,20 +243,19 @@ namespace NaiveWordCounter.Tests
 		}
 
 		[Test]
-		public void IsPrime_ShouldReturnBoolean_WhenPassedListOfIntegers()
+		public void GetListOfPrimes_ShouldReturnBoolean_WhenPassedListOfIntegers()
 		{
+			//Arrange
+			var input = new List<int>() { 1, 2, 97, 98 };
+			var primeNumberCalculator = new PrimeNumberCalculator();			
 			var expectedOutput = new Dictionary<int, bool>()
 			{
-				{1, false},
 				{2, true}, 
-				{97, true},
-				{98, false}
+				{97, true}
 			};
-			var input = new List<int>() { 1, 2, 97, 98 };
-			var primeNumberCalculator = new PrimeNumberCalculator();
 
 			//Act
-			var actualOutput = primeNumberCalculator.IsPrime(input);
+			var actualOutput = primeNumberCalculator.GetListOfPrimes(input);
 
 			//Assert
 			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
@@ -264,31 +263,29 @@ namespace NaiveWordCounter.Tests
 
 		[Test]
 		//Another integration test
-		public void GetResults_ShouldReturnCorrectCount_WhenPassedThePlacesYoullGo()
+		public void GetPrimes_ShouldReturnCorrectPrimes_WhenPassedThePlacesYoullGo()
 		{
 			//Arrange
-			//This is not needed for the test, but shows what the wordCount returns
-			//Leaving here for now to help visualise the test
-			var WordCountResult = new Dictionary<string, int>() { 
+			var input = new Dictionary<string, int>() { 
 				{"you", 22},
 				{"and", 16},
 				{"youll", 15},
 				{"your", 13},
 				{"to", 10},
-				{"the", 9},
+				{"the", 10},
 				{"go", 8},
-				{"be", 6},
+				{"be", 7},
 				{"of", 6},
 				{"great", 5}
 			};
 
 			var expectedOutput = new Dictionary<int, bool>(){
 				{13, true},
+				{7, true},
 				{5, true}
 			};
 
 			var runner = new Runner();
-			var input = "ThePlacesYou'llGo.txt";
 
 			//Act
 			var actualOutput = runner.GetPrimes(input);
