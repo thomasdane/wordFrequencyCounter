@@ -41,8 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileHandler.cs" />
+    <Compile Include="OutputGenerator.cs" />
+    <Compile Include="PrimeNumberCalculator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WordCounter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -16,7 +16,7 @@ namespace NaiveWordCounter.Tests
 			//Arrange
 			var expectedOutput = "The quick brown fox";
 			var fileName = "SingleSentence.txt"; //TODO: rename this. 
-			var fileHandler = new FileHandler();
+			var fileHandler = new FileReader();
 
 			//Act
 			var actualOutput = fileHandler.ReadTextFile(fileName);  
@@ -33,7 +33,7 @@ namespace NaiveWordCounter.Tests
 			var expectedOutput = new string[42]; //I will have to develop a solution for very large books. 
 			var firstLine = "Lorem ipsum dolor sit amet";
 			var lastLine = "deserunt mollit anim id est laborum";
-			var fileHandler = new FileHandler();
+			var fileHandler = new FileReader();
 
 			//Act
 			var actualOutput = fileHandler.ReadTextFile(fileName);
@@ -52,7 +52,7 @@ namespace NaiveWordCounter.Tests
 			var expectedOutput = new string[1]; //I will have to develop a solution for very large books. 
 			var firstLine = "hi";
 			var lastLine = "hi";
-			var fileHandler = new FileHandler();
+			var fileHandler = new FileReader();
 
 			//Act
 			var actualOutput = fileHandler.ReadTextFile(fileName);
