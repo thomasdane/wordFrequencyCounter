@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using NaiveWordCounter.Interfaces;
+using System.Diagnostics;
 
 namespace NaiveWordCounter
 {
@@ -14,13 +15,27 @@ namespace NaiveWordCounter
 			IWordCounter wordCounter = new WordCounter();
 			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
 			IOutputGenerator outputGenerator = new OutputGenerator();
-
 			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
 
-			var results = compareTheWords.Compare("RailwayChildren.txt");
-			var top10Results = results.Take(10).ToList<string>(); 
+			//Benchmark for Railway Children
 
-			top10Results.ForEach(i => Console.WriteLine(i));
+			Stopwatch sw = new Stopwatch();
+			sw.Start();
+			var railwayChildren = compareTheWords.Compare("RailwayChildren.txt");
+			var railwayChildrenTop10Results = railwayChildren.Take(10).ToList<string>();
+			railwayChildrenTop10Results.ForEach(i => Console.WriteLine(i));
+			sw.Stop();
+			Console.WriteLine("Elapsed={0}", sw.Elapsed);
+
+			//Benchmark for War and Peace
+
+			Stopwatch sw2 = new Stopwatch();
+			sw2.Start();
+			var warAndPeace = compareTheWords.Compare("WarAndPeace.txt");
+			var warAndPeaceTop10Results = warAndPeace.Take(10).ToList<string>();
+			warAndPeaceTop10Results.ForEach(i => Console.WriteLine(i));
+			sw2.Stop();
+			Console.WriteLine("Elapsed={0}", sw2.Elapsed);
 			Console.ReadLine();
 		}
 	}
