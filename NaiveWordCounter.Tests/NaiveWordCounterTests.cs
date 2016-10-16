@@ -87,7 +87,7 @@ namespace NaiveWordCounter.Tests
 		{
 			//Arrange
 			var expectedOutput = new Dictionary<string, int>() { };
-			var runner = new CompareTheTextFile();
+			var runner = new CompareTheWords();
 			var input = "RailwayChildren.txt";
 
 			//Act
@@ -103,7 +103,7 @@ namespace NaiveWordCounter.Tests
 		{
 			//Arrange
 			var expectedOutput = new Dictionary<string, int>() { };
-			var runner = new CompareTheTextFile();
+			var runner = new CompareTheWords();
 			var input = "WarAndPeace.txt";
 
 			//Act
@@ -133,7 +133,7 @@ namespace NaiveWordCounter.Tests
 				{"great", 5}
 			};
 			
-			var runner = new CompareTheTextFile();
+			var runner = new CompareTheWords();
 			var input = "ThePlacesYou'llGo.txt";
 
 			//Act
@@ -159,7 +159,7 @@ namespace NaiveWordCounter.Tests
 				{"testing", 1}
 			};
 
-			var runner = new CompareTheTextFile();
+			var runner = new CompareTheWords();
 			var input = "AFewSentences.txt";
 
 			//Act
@@ -281,7 +281,7 @@ namespace NaiveWordCounter.Tests
 				{5, true}
 			};
 
-			var runner = new CompareTheTextFile();
+			var runner = new CompareTheWords();
 
 			//Act
 			var actualOutput = runner.GetPrimes(input);
@@ -302,7 +302,7 @@ namespace NaiveWordCounter.Tests
 				{"to", 7},
 			};
 			var expectedOutput = new List<int>(){ 12, 10, 7};
-			var runner = new CompareTheTextFile();
+			var runner = new CompareTheWords();
 
 			//Act
 			var actualOutput = runner.GetPrimes(input);
@@ -314,7 +314,7 @@ namespace NaiveWordCounter.Tests
 		[Test]
 		public void CompareTheTextFile_ShouldReturnWordFrequencyAndIsPrime_WhenPassedRailwayChildren()
 		{
-			var compareTheTextFile = new CompareTheTextFile();
+			var compareTheTextFile = new CompareTheWords();
 			var input = "RailwayChildren.txt";
 			var expectedOutput = new string[]
 			{
@@ -323,6 +323,36 @@ namespace NaiveWordCounter.Tests
 			};
 
 			var actualOutput = compareTheTextFile.Compare(input);
+
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
+		}
+
+		[Test]
+		public void OutputGenerator_ShouldGenerateListOfStrings_WhenPassedWordCountResultsAndPrimes()
+		{
+			var wordCountResults = new Dictionary<string, int>() { 
+				{"compare", 22},
+				{"the", 13},
+				{"market", 10},
+				{"codeTest", 7},
+			};
+
+			var listOfPrimes = new Dictionary<int, bool>(){
+				{13, true},
+				{7, true},
+				{5, true}
+			};
+
+			var expectedOutput = new List<string>
+			{
+				"compare, 22, false", 
+				"the, 13, true",
+				"market, 10, false", 
+				"codeTest, 7, true",
+			};
+
+			var outputGenerator = new OutputGenerator();
+			var actualOutput = outputGenerator.GenerateOutput(wordCountResults, listOfPrimes);
 
 			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
 		}

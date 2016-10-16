@@ -14,27 +14,40 @@ namespace NaiveWordCounter
 		static void Main(string[] args)
 		{
 			var railWayChildren = "RailwayChildren.txt";
-			var comparetheTextFile = new CompareTheTextFile();
-			var results = comparetheTextFile.Compare(railWayChildren);
-			var count = results.Count() < 30 ? results.Count() : 30; //get the top 30 results
-
-			for (var i = 0; i < count; i++ )
-			{
-				Console.WriteLine(results[i]);
-			}
-
+			var compareTheWords = new CompareTheWords();
+			var results = compareTheWords.Compare(railWayChildren);
+			var top30Results = results.Take(30).ToList<string>(); 
+			top30Results.ForEach(i => Console.WriteLine(i));
 			Console.ReadLine();
 		}
 	}
 
-	public class CompareTheTextFile
+	public class OutputGenerator
 	{
-		public CompareTheTextFile()
+		public IList<string> GenerateOutput(IDictionary<string, int> wordCountResults, IDictionary<int, bool> ListOfPrimes)
 		{
+			return new List<string>
+			{
+				"foo, 10, false", 
+				"meerkat, 7, true"
+			};
 		}
+	}
 
-		public IList<string> Compare(string textFile)
+	public class CompareTheWords
+	{
+		public List<string> Compare(string textFile)
 		{
+			var fileHandler = new FileHandler();
+			var content = fileHandler.ReadTextFile(textFile);
+
+			var wordCounter = new WordCounter();
+			var wordCount = wordCounter.Count(content);
+
+			var primeNumberCalculator = new PrimeNumberCalculator();
+			var results = primeNumberCalculator.GetPrimes(wordCount);
+
+			//output i want is "foo, 7, true"
 			return new List<string>
 			{
 				"foo, 10, false", 
@@ -66,6 +79,13 @@ namespace NaiveWordCounter
 		{
 			var result = wordCountResults.Values.Distinct().ToList();
 			return result;
+		}
+
+		public IDictionary<int, bool> GetPrimes(IDictionary<string, int> wordCountResults)
+		{
+			var distinctIntegers = GetDistinctIntegers(wordCountResults);
+			var listOfPrimes = GetListOfPrimes(distinctIntegers);
+			return listOfPrimes;
 		}
 
 		public IDictionary<int, bool> GetListOfPrimes(IList<int> ListOfIntegers)
