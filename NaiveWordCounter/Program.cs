@@ -56,12 +56,10 @@ namespace NaiveWordCounter
 			var primeNumberCalculator = new PrimeNumberCalculator();
 			var primes = primeNumberCalculator.GetPrimes(wordCount);
 
-			//output i want is "foo, 7, true"
-			return new List<string>
-			{
-				"foo, 10, false", 
-				"meerkat, 7, true"
-			};
+			var outputGenerator = new OutputGenerator();
+			var output = outputGenerator.GenerateOutput(wordCount, primes);
+
+			return output;
 		}
 		
 		public IDictionary<string, int> GetWordCount(string fileName)
