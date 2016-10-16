@@ -11,8 +11,11 @@ namespace NaiveWordCounter
 		static void Main(string[] args)
 		{
 			IFileReader fileReader = new FileReader();
+			IWordCounter wordCounter = new WordCounter();
+			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
+			IOutputGenerator outputGenerator = new OutputGenerator();
 
-			var compareTheWords = new CompareTheWords(fileReader);
+			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
 
 			var results = compareTheWords.Compare("RailwayChildren.txt");
 			var top10Results = results.Take(10).ToList<string>(); 
@@ -25,25 +28,24 @@ namespace NaiveWordCounter
 	public class CompareTheWords
 	{
 		protected readonly IFileReader _fileReader;
+		protected readonly IWordCounter _wordCounter;
+		protected readonly IPrimeNumberCalculator _primeNumberCalculator;
+		protected readonly IOutputGenerator _outputGenerator;
 
-		public CompareTheWords(IFileReader fileReader)
+		public CompareTheWords(IFileReader fileReader, IWordCounter wordCounter, IPrimeNumberCalculator primeNumberCalculator, IOutputGenerator outputGenerator)
 		{
 			_fileReader = fileReader;
+			_wordCounter = wordCounter;
+			_primeNumberCalculator = primeNumberCalculator;
+			_outputGenerator = outputGenerator;
 		}
 		
-		public List<string> Compare(string textFile)
-		{
-			
-			var content = _fileReader.ReadTextFile(textFile);
-
-			var wordCounter = new WordCounter();
-			var wordCount = wordCounter.Count(content);
-
-			var primeNumberCalculator = new PrimeNumberCalculator();
-			var primes = primeNumberCalculator.GetPrimes(wordCount);
-
-			var outputGenerator = new OutputGenerator();
-			var output = outputGenerator.GenerateOutput(wordCount, primes);
+		public List<string> Compare(string fileName)
+		{		
+			var fileContent = _fileReader.ReadTextFile(fileName);
+			var wordCount = _wordCounter.Count(fileContent);
+			var primes = _primeNumberCalculator.GetPrimes(wordCount);
+			var output = _outputGenerator.GenerateOutput(wordCount, primes);
 
 			return output;
 		}

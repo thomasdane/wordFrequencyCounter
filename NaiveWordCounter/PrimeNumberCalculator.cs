@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NaiveWordCounter.Interfaces;
 
 namespace NaiveWordCounter
 {
-	public class PrimeNumberCalculator
+	public class PrimeNumberCalculator : IPrimeNumberCalculator
 	{
 		public List<int> GetDistinctIntegers(IDictionary<string, int> wordCountResults)
 		{

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NaiveWordCounter.Interfaces;
+
 
 namespace NaiveWordCounter
 {
-	public class OutputGenerator
+	public class OutputGenerator : IOutputGenerator
 	{
 		public List<string> GenerateOutput(IDictionary<string, int> wordCountResults, IDictionary<int, bool> ListOfPrimes)
 		{
@@ -15,7 +17,6 @@ namespace NaiveWordCounter
 
 			foreach (KeyValuePair<string, int> wordCount in wordCountResults)
 			{
-
 				//is the word count number present in the list of primes? 
 				isPrime = ListOfPrimes.Keys.Contains(wordCount.Value) ? true : false;
 

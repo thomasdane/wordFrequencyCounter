@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="FileReader.cs" />
     <Compile Include="Interfaces\IFileReader.cs" />
+    <Compile Include="Interfaces\IWordCounter.cs" />
+    <Compile Include="Interfaces\IPrimeNumberCalculator.cs" />
+    <Compile Include="Interfaces\IOutputGenerator.cs" />
     <Compile Include="OutputGenerator.cs" />
     <Compile Include="PrimeNumberCalculator.cs" />
     <Compile Include="Program.cs" />

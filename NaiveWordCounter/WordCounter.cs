@@ -3,10 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
+using NaiveWordCounter.Interfaces;
 
 namespace NaiveWordCounter
 {
-	public class WordCounter
+	public class WordCounter : IWordCounter
 	{
 		public IDictionary<string, int> Count(string[] linesOfText)
 		{

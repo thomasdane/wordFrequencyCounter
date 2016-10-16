@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NaiveWordCounter", "NaiveWordCounter\NaiveWordCounter.csproj", "{E0E7F366-1C6A-4FFF-900D-9CAF07FD30F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NaiveWordCounter.Tests", "NaiveWordCounter.Tests\NaiveWordCounter.Tests.csproj", "{FCA4EA61-AEAD-4124-98E2-3F668FEB4B4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NaiveWordCounter.Tests.Unit", "NaiveWordCounter.Tests\NaiveWordCounter.Tests.Unit.csproj", "{FCA4EA61-AEAD-4124-98E2-3F668FEB4B4B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{15C74635-00CB-4820-A73D-7ECE09661747}"
 	ProjectSection(SolutionItems) = preProject

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using NaiveWordCounter.Interfaces;
 
 namespace NaiveWordCounter.Tests.Integration
 {
@@ -16,13 +17,17 @@ namespace NaiveWordCounter.Tests.Integration
 		public void GetResults_ShouldReturnDictionary_WhenPassedSampleBook_RailwayChildren()
 		{
 			//Arrange
+			IFileReader fileReader = new FileReader();
+			IWordCounter wordCounter = new WordCounter();
+			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
+			IOutputGenerator outputGenerator = new OutputGenerator();
+			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
+
 			var expectedOutput = new Dictionary<string, int>() { };
-			var fileReader = new FileReader();
-			var runner = new CompareTheWords(fileReader);
 			var input = "RailwayChildren.txt";
 
 			//Act
-			var actualOutput = runner.GetWordCount(input);
+			var actualOutput = compareTheWords.Compare(input);
 
 			//Assert
 			CollectionAssert.IsNotEmpty(actualOutput);
@@ -33,13 +38,16 @@ namespace NaiveWordCounter.Tests.Integration
 		public void GetResults_ShouldReturnDictionary_WhenPassedWarAndPeace()
 		{
 			//Arrange
-			var expectedOutput = new Dictionary<string, int>() { };
-			var fileReader = new FileReader();
-			var compareTheWords = new CompareTheWords(fileReader);
+			IFileReader fileReader = new FileReader();
+			IWordCounter wordCounter = new WordCounter();
+			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
+			IOutputGenerator outputGenerator = new OutputGenerator();
+			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
+			var expectedOutput = new Dictionary<string, int>() { };			
 			var input = "WarAndPeace.txt";
 
 			//Act
-			var actualOutput = compareTheWords.GetWordCount(input);
+			var actualOutput = compareTheWords.Compare(input);
 
 			//Assert
 			CollectionAssert.IsNotEmpty(actualOutput);
@@ -58,12 +66,15 @@ namespace NaiveWordCounter.Tests.Integration
 				{"testing", 1}
 			};
 
-			var fileReader = new FileReader();
-			var runner = new CompareTheWords(fileReader);
+			IFileReader fileReader = new FileReader();
+			IWordCounter wordCounter = new WordCounter();
+			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
+			IOutputGenerator outputGenerator = new OutputGenerator();
+			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
 			var input = "AFewSentences.txt";
 
 			//Act
-			var actualOutput = runner.GetWordCount(input);
+			var actualOutput = compareTheWords.GetWordCount(input);
 			var actualOutputSorted = actualOutput.OrderByDescending(x => x.Value);
 
 			//Assert
@@ -73,8 +84,11 @@ namespace NaiveWordCounter.Tests.Integration
 		[Test]
 		public void CompareTheTextFile_ShouldReturnWordFrequencyAndIsPrime_WhenPassedWarAndPeace()
 		{
-			var fileReader = new FileReader();
-			var compareTheWords = new CompareTheWords(fileReader);
+			IFileReader fileReader = new FileReader();
+			IWordCounter wordCounter = new WordCounter();
+			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
+			IOutputGenerator outputGenerator = new OutputGenerator();
+			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
 			var input = "WarAndPeace.txt";
 			var expectedOutput = new string[]
 			{
@@ -94,8 +108,11 @@ namespace NaiveWordCounter.Tests.Integration
 		[Test]
 		public void CompareTheTextFile_ShouldReturnWordFrequencyAndIsPrime_WhenPassedTwoCopiesOfWarAndPeace()
 		{
-			var fileReader = new FileReader();
-			var compareTheWords = new CompareTheWords(fileReader);
+			IFileReader fileReader = new FileReader();
+			IWordCounter wordCounter = new WordCounter();
+			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
+			IOutputGenerator outputGenerator = new OutputGenerator();
+			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
 			var input = "TwoCopiesOfWarAndPeace.txt";
 			var expectedOutput = new string[]
 			{
@@ -132,8 +149,11 @@ namespace NaiveWordCounter.Tests.Integration
 				{5, true}
 			};
 
-			var fileReader = new FileReader();
-			var compareTheWords = new CompareTheWords(fileReader);
+			IFileReader fileReader = new FileReader();
+			IWordCounter wordCounter = new WordCounter();
+			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
+			IOutputGenerator outputGenerator = new OutputGenerator();
+			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
 
 			//Act
 			var actualOutput = compareTheWords.GetPrimes(input);
@@ -154,8 +174,11 @@ namespace NaiveWordCounter.Tests.Integration
 				{"to", 7},
 			};
 			var expectedOutput = new List<int>() { 12, 10, 7 };
-			var fileReader = new FileReader();
-			var compareTheWords = new CompareTheWords(fileReader);
+			IFileReader fileReader = new FileReader();
+			IWordCounter wordCounter = new WordCounter();
+			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
+			IOutputGenerator outputGenerator = new OutputGenerator();
+			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
 
 			//Act
 			var actualOutput = compareTheWords.GetPrimes(input);
@@ -167,8 +190,11 @@ namespace NaiveWordCounter.Tests.Integration
 		[Test]
 		public void CompareTheTextFile_ShouldReturnWordFrequencyAndIsPrime_WhenPassedRailwayChildren()
 		{
-			var fileReader = new FileReader();
-			var compareTheWords = new CompareTheWords(fileReader);
+			IFileReader fileReader = new FileReader();
+			IWordCounter wordCounter = new WordCounter();
+			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
+			IOutputGenerator outputGenerator = new OutputGenerator();
+			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
 			var input = "RailwayChildren.txt";
 			var expectedOutput = new string[]
 			{
@@ -204,8 +230,11 @@ namespace NaiveWordCounter.Tests.Integration
 				{"great", 5}
 			};
 
-			var fileReader = new FileReader();
-			var compareTheWords = new CompareTheWords(fileReader);
+			IFileReader fileReader = new FileReader();
+			IWordCounter wordCounter = new WordCounter();
+			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
+			IOutputGenerator outputGenerator = new OutputGenerator();
+			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
 			var input = "ThePlacesYou'llGo.txt";
 
 			//Act

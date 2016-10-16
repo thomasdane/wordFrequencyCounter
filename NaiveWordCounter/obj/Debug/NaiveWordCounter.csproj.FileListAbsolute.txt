@@ -1,6 +1,5 @@
 C:\git\NaiveWordCounter\NaiveWordCounter\bin\Debug\NaiveWordCounter.exe.config
 C:\git\NaiveWordCounter\NaiveWordCounter\bin\Debug\NaiveWordCounter.exe
 C:\git\NaiveWordCounter\NaiveWordCounter\bin\Debug\NaiveWordCounter.pdb
-C:\git\NaiveWordCounter\NaiveWordCounter\obj\Debug\NaiveWordCounter.csprojResolveAssemblyReference.cache
 C:\git\NaiveWordCounter\NaiveWordCounter\obj\Debug\NaiveWordCounter.exe
 C:\git\NaiveWordCounter\NaiveWordCounter\obj\Debug\NaiveWordCounter.pdb
