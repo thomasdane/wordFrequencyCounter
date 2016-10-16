@@ -162,7 +162,8 @@ namespace NaiveWordCounter
 				}
 			});
 
-			return result;
+			var orderedResult = result.OrderByDescending(x => x.Value).ToDictionary(i => i.Key, i => i.Value);;
+			return orderedResult;
 		}
 	}
 

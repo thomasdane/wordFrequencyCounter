@@ -89,10 +89,12 @@
   <ItemGroup>
     <Content Include="Books\AFewSentences.txt" />
     <Content Include="Books\HelloWorld.txt" />
+    <Content Include="Books\Primes.txt" />
     <Content Include="Books\RailwayChildren.txt" />
     <Content Include="Books\SingleSentence.txt" />
     <Content Include="Books\42LinesOfText.txt" />
     <Content Include="Books\ThePlacesYou%27llGo.txt" />
+    <Content Include="Books\TwoCopiesOfWarAndPeace.txt" />
     <Content Include="Books\VerySmallBook.txt" />
     <Content Include="Books\WarAndPeace.txt" />
   </ItemGroup>

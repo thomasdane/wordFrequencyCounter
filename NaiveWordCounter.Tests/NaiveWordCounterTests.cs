@@ -7,8 +7,8 @@ namespace NaiveWordCounter.Tests
 	[TestFixture]
     public class NaiveWordCounterTests
     {
-		//I am going to be committing more than usual here. I want to show thought process. In production or at work,
-		//I would prefer to rebease all of this into a single clean commit before merging to master. 
+		//I am going to be committing more than usual here. I want to show thought process. At work,
+		//I would prefer to rebase all of this into a single clean commit before merging to master. 
 
 		[Test]
 		public void ReadTextFile_ShouldReturnText_WhenProvidedTxtFile()
@@ -318,13 +318,17 @@ namespace NaiveWordCounter.Tests
 			var input = "RailwayChildren.txt";
 			var expectedOutput = new string[]
 			{
-				"foo, 10, false", 
-				"meerkat, 7, true"
+				"the, 3344, False", 
+				"and, 2390, False",
+				"to, 1525, False",
+				"a, 1157, False",
+				"said, 1141, False",
 			};
 
 			var actualOutput = compareTheTextFile.Compare(input);
+			var actualOutputTop5 = actualOutput.Take(5).ToList();
 
-			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutputTop5);
 		}
 
 		[Test]
@@ -355,6 +359,46 @@ namespace NaiveWordCounter.Tests
 			var actualOutput = outputGenerator.GenerateOutput(wordCountResults, listOfPrimes);
 
 			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
+		}
+
+		[Test]
+		public void CompareTheTextFile_ShouldReturnWordFrequencyAndIsPrime_WhenPassedWarAndPeace()
+		{
+			var compareTheTextFile = new CompareTheWords();
+			var input = "WarAndPeace.txt";
+			var expectedOutput = new string[]
+			{
+				"the, 34562, False", 
+				"and, 22148, False",
+				"to, 16709, False",
+				"of, 14990, False",
+				"a, 10513, True",
+			};
+
+			var actualOutput = compareTheTextFile.Compare(input);
+			var actualOutputTop5 = actualOutput.Take(5).ToList();
+
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutputTop5);
+		}
+
+		[Test]
+		public void CompareTheTextFile_ShouldReturnWordFrequencyAndIsPrime_WhenPassedTwoCopiesOfWarAndPeace()
+		{
+			var compareTheTextFile = new CompareTheWords();
+			var input = "TwoCopiesOfWarAndPeace.txt";
+			var expectedOutput = new string[]
+			{
+				"the, 69124, False", 
+				"and, 44296, False",
+				"to, 33418, False",
+				"of, 29980, False",
+				"a, 21026, False",
+			};
+
+			var actualOutput = compareTheTextFile.Compare(input);
+			var actualOutputTop5 = actualOutput.Take(5).ToList();
+
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutputTop5);
 		}
 	}
 }

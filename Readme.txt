@@ -29,14 +29,13 @@ PRIMES
 I did a lot of research into the Sieve of Eratosthenes vs Sieve of Atkin, 
 before I realised I did not have to GENERATE primes! Only determine if an integer IS prime. 
 
-The example I used for the sieve was here and some talk of optimisation
-http://codereview.stackexchange.com/questions/6115/sieve-of-eratosthenes-in-c-with-linq
+I wrote a very simple (slow) prime calculator. There are lots of ways to find primes fast, as discussed here: http://stackoverflow.com/questions/15743192/check-if-number-is-prime-number
 
-Another better solution is to hardcode the list of primes and then check against them: 
+Another way might be to hardcode the list of primes and then check against them: 
 https://www.dotnetperls.com/prime
 
-Another great discussion of finding primes fast is here:
-http://stackoverflow.com/questions/15743192/check-if-number-is-prime-number
+The longest novel ever written (Zettels Traum) is estimated at 1,100,000 words (source https://en.wikipedia.org/wiki/List_of_longest_novels). Let's assume the wost case where we had a book
+that was longer, and composed of only a single word. So 1,100,001 'meerkats' in a book. 
 
 Notes
 
@@ -50,6 +49,14 @@ Limitations and Extensions
 - The brute force solution to that problem would be to spin this up on multiple instances and process 1 book per instance
 - words with hyphens will have issues. they will be counted correctly, but display incorrectly. for example,
 free-for-all will be displayed as freeforall. 
+- I noticed online that some word frequency counters allow the user to exclude common words like 'the', 'to', 'and' etc. That would be a nice feature. 
+If the business/customer wanted it in the case of this application, it would be easy to create a list of such common words and exclude them from the results. 
+It may even speed up the app by excluding the most common results. 
+
+Long Books/Text Files
+
+- I included War and Peace as an example, but it is not the longest novel ever written. https://en.wikipedia.org/wiki/List_of_longest_novels
+So I copy and pasted the book twice into the one file, producing a book far longer than the longest ever book. 
 
 Requirements
 
