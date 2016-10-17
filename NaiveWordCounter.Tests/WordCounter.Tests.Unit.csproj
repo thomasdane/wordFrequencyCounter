@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5C5A23C5-856C-41E4-BB9A-29F5F2F1646B}</ProjectGuid>
+    <ProjectGuid>{FCA4EA61-AEAD-4124-98E2-3F668FEB4B4B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NaiveWordCounter.Tests.Integration</RootNamespace>
-    <AssemblyName>NaiveWordCounter.Tests.Integration</AssemblyName>
+    <RootNamespace>NaiveWordCounter.Tests</RootNamespace>
+    <AssemblyName>NaiveWordCounter.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -71,28 +71,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NaiveWordCounterIntegrationTests.cs" />
+    <Compile Include="NaiveWordCounterUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NaiveWordCounter\NaiveWordCounter.csproj">
-      <Project>{e0e7f366-1c6a-4fff-900d-9caf07fd30f9}</Project>
-      <Name>NaiveWordCounter</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Books\42LinesOfText.txt" />
+    <ProjectReference Include="..\NaiveWordCounter\WordCounter.csproj">
+      <Project>{e0e7f366-1c6a-4fff-900d-9caf07fd30f9}</Project>
+      <Name>WordCounter</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Books\AFewSentences.txt" />
     <Content Include="Books\HelloWorld.txt" />
     <Content Include="Books\Primes.txt" />
     <Content Include="Books\RailwayChildren.txt" />
     <Content Include="Books\SingleSentence.txt" />
+    <Content Include="Books\42LinesOfText.txt" />
     <Content Include="Books\ThePlacesYou%27llGo.txt" />
     <Content Include="Books\TwoCopiesOfWarAndPeace.txt" />
     <Content Include="Books\VerySmallBook.txt" />
