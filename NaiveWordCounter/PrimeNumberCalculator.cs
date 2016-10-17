@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NaiveWordCounter.Interfaces;
 
 namespace NaiveWordCounter
@@ -22,11 +19,11 @@ namespace NaiveWordCounter
 			return result;
 		}
 
-		public IDictionary<int, bool> GetListOfPrimes(IList<int> ListOfIntegers)
+		public IDictionary<int, bool> GetListOfPrimes(IList<int> listOfIntegers)
 		{
-			var result = new Dictionary<int, bool>() { };
+			var result = new Dictionary<int, bool>();
 
-			foreach (var integer in ListOfIntegers)
+			foreach (var integer in listOfIntegers)
 			{
 				if (IsPrime(integer))
 				{

@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using NaiveWordCounter.Interfaces;
-using Moq;
 
 namespace NaiveWordCounter.Tests
 {
@@ -137,7 +135,7 @@ namespace NaiveWordCounter.Tests
 			//Regression test to address issue with full stops. 
 			//Arrange
 			var wordCounter = new WordCounter();
-			var input = new string[]{
+			var input = new []{
 				"hello world!",
 				"hello world.",
 				"Let's test."

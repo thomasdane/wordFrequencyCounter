@@ -9,7 +9,7 @@ namespace NaiveWordCounter
 {
 	class Program
 	{
-		static void Main(string[] args)
+		static void Main()
 		{
 			IFileReader fileReader = new FileReader();
 			IWordCounter wordCounter = new WordCounter();
@@ -42,10 +42,10 @@ namespace NaiveWordCounter
 
 	public class CompareTheWords
 	{
-		protected readonly IFileReader _fileReader;
-		protected readonly IWordCounter _wordCounter;
-		protected readonly IPrimeNumberCalculator _primeNumberCalculator;
-		protected readonly IOutputGenerator _outputGenerator;
+		private readonly IFileReader _fileReader;
+		private readonly IWordCounter _wordCounter;
+		private readonly IPrimeNumberCalculator _primeNumberCalculator;
+		private readonly IOutputGenerator _outputGenerator;
 
 		public CompareTheWords(IFileReader fileReader, IWordCounter wordCounter, IPrimeNumberCalculator primeNumberCalculator, IOutputGenerator outputGenerator)
 		{
