@@ -12,9 +12,9 @@ namespace NaiveWordCounter
 		static void Main()
 		{
 			BenchMarksVersion1.RailwayChildrenVersion1();
-			BenchMarks_HardCodedPrimes.RailwayChildren_HardCodedPrimes();
+		//	BenchMarks_HardCodedPrimes.RailwayChildren_HardCodedPrimes();
 			BenchMarksVersion1.WarAndPeaceVersion1();
-			BenchMarks_HardCodedPrimes.WarAndPeace_HardCodedPrimes();
+		//	BenchMarks_HardCodedPrimes.WarAndPeace_HardCodedPrimes();
 
 			Console.ReadLine();
 		}

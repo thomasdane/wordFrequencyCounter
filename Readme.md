@@ -51,7 +51,7 @@ I put these in a folder called SecondVersion.
 
 ####1. File Reader
 
-One way to speed this up would be to pre-allocate the size of the array. 
+One way to speed this up would be to pre-allocate the size of the array  http://cc.davelozinski.com/c-sharp/the-fastest-way-to-read-and-process-text-files
 
 ####2. Word Counter
 
