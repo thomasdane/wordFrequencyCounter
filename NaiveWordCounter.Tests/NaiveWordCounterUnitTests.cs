@@ -22,7 +22,7 @@ namespace NaiveWordCounter.Tests
 
 			//Act
 			var actualOutput = fileHandler.ReadTextFile(input);
-			var actualOutputString = actualOutput.First().ToString();
+			var actualOutputString = actualOutput.First();
 
 			//Assert
 			Assert.AreEqual(expectedOutput, actualOutputString);
@@ -43,27 +43,25 @@ namespace NaiveWordCounter.Tests
 
 			//Assert
 			Assert.AreEqual(expectedOutput.Length, actualOutput.Length);
-			Assert.AreEqual(firstLine, actualOutput.First().ToString());
-			Assert.AreEqual(lastLine, actualOutput.Last().ToString());
+			Assert.AreEqual(firstLine, actualOutput.First());
+			Assert.AreEqual(lastLine, actualOutput.Last());
 		}
 
 		[Test]
 		public void ReadTextFile_ShouldReturnCorrectArray_WhenProvidedVerySmallTextFile()
 		{
 			//Arrange
-			var fileName = "VerySmallBook.txt";
-			var expectedOutput = new string[1]; //I will have to develop a solution for very large books. 
-			var firstLine = "hi";
-			var lastLine = "hi";
+			const string fileName = "VerySmallBook.txt";
+			const string firstLine = "hi";
+			const string lastLine = "hi";
 			var fileHandler = new FileReader();
 
 			//Act
 			var actualOutput = fileHandler.ReadTextFile(fileName);
 
 			//Assert
-			Assert.AreEqual(expectedOutput.Length, actualOutput.Length);
-			Assert.AreEqual(firstLine, actualOutput.First().ToString());
-			Assert.AreEqual(lastLine, actualOutput.Last().ToString());
+			Assert.AreEqual(firstLine, actualOutput.First());
+			Assert.AreEqual(lastLine, actualOutput.Last());
 		}
 
 		//WordCounter Tests
@@ -72,8 +70,8 @@ namespace NaiveWordCounter.Tests
 		{
 			//Arrange
 			var wordCounter = new WordCounter();
-			var input = new string[2] { "hello world world", "hello world world" };			
-			var expectedOutput = new Dictionary<string, int>(){
+			var input = new [] { "hello world world", "hello world world" };			
+			var expectedOutput = new Dictionary<string, int>{
 				{"hello", 2},
 				{"world", 4}
 			};
@@ -89,12 +87,12 @@ namespace NaiveWordCounter.Tests
 		public void CountWords_ShouldIgnorePunctuationAndNumbers_WhenPassedEnglishText()
 		{
 			//Arrange
-			var expectedOutput = new Dictionary<string, int>(){
+			var expectedOutput = new Dictionary<string, int>{
 				{"hello", 2},
 				{"world", 4}
 			};
 			var wordCounter = new WordCounter();
-			var input = new string[2] { "Hello worlD & World 1", "hello WORLD, world 1" };
+			var input = new [] { "Hello worlD & World 1", "hello WORLD, world 1" };
 
 			//Act
 			var actualOutput = wordCounter.Count(input);
@@ -108,8 +106,8 @@ namespace NaiveWordCounter.Tests
 		{
 			//Arrange
 			var wordCounter = new WordCounter();
-			var input = new string[2] { "«здравствулте мир»", "「你好世界」。"}; //'Hello World' in Chinese and Russian, with native punctuation
-			var expectedOutput = new Dictionary<string, int>(){
+			var input = new [] { "«здравствулте мир»", "「你好世界」。"}; //'Hello World' in Chinese and Russian, with native punctuation
+			var expectedOutput = new Dictionary<string, int>{
 				{"здравствулте", 1},
 				{"мир", 1},
 				{"你好世界", 1}
@@ -119,10 +117,10 @@ namespace NaiveWordCounter.Tests
 			var actualOutput = wordCounter.Count(input);
 			//One does not simply compare two unicode strings. They need to be escaped. 
 			//More information: http://stackoverflow.com/questions/9461971/nunit-how-to-compare-strings-containing-composite-unicode-characters
-			var ActualChineseHelloWorld = System.Uri.UnescapeDataString(actualOutput.Keys.Last().ToString());
-			var ActualRussianHelloWorld = System.Uri.UnescapeDataString(actualOutput.Keys.First().ToString());
-			var ExpectedChineseHelloWorld = System.Uri.UnescapeDataString(expectedOutput.Keys.Last().ToString());
-			var ExpectedRussianHelloWorld = System.Uri.UnescapeDataString(expectedOutput.Keys.First().ToString());
+			var ActualChineseHelloWorld = System.Uri.UnescapeDataString(actualOutput.Keys.Last());
+			var ActualRussianHelloWorld = System.Uri.UnescapeDataString(actualOutput.Keys.First());
+			var ExpectedChineseHelloWorld = System.Uri.UnescapeDataString(expectedOutput.Keys.Last());
+			var ExpectedRussianHelloWorld = System.Uri.UnescapeDataString(expectedOutput.Keys.First());
 
 			//Assert
 			Assert.AreEqual(ExpectedChineseHelloWorld, ActualChineseHelloWorld);
@@ -140,7 +138,7 @@ namespace NaiveWordCounter.Tests
 				"hello world.",
 				"Let's test."
 			};
-			var expectedOutput = new Dictionary<string, int>() { 
+			var expectedOutput = new Dictionary<string, int> { 
 				{"hello", 2},
 				{"world", 2},
 				{"lets", 1},
@@ -160,7 +158,7 @@ namespace NaiveWordCounter.Tests
 		{
 			//Arrange
 			var primeNumberCalculator = new PrimeNumberCalculator();
-			var input = new Dictionary<string, int>()
+			var input = new Dictionary<string, int>
 			{
 				{"foo", 1},
 				{"bar", 1},
@@ -168,7 +166,7 @@ namespace NaiveWordCounter.Tests
 				{"ivan", 3},
 				{"sergei", 3}
 			};
-			var expectedOutput = new List<int>(){ 1,2,3 };		
+			var expectedOutput = new List<int>{ 1,2,3 };		
 
 			//Act
 			var actualOutput = primeNumberCalculator.GetDistinctIntegers(input);
@@ -181,7 +179,7 @@ namespace NaiveWordCounter.Tests
 		{
 			//Arrange
 			var primeNumberCalculator = new PrimeNumberCalculator();
-			var input = new Dictionary<string, int>() { 
+			var input = new Dictionary<string, int> { 
 				{"you", 22},
 				{"to", 10},
 				{"fro", 10},
@@ -189,7 +187,7 @@ namespace NaiveWordCounter.Tests
 				{"be", 7},
 				{"to", 7},
 			};
-			var expectedOutput = new List<int>() { 12, 10, 7 };
+			var expectedOutput = new List<int> { 12, 10, 7 };
 			
 			//Act
 			var actualOutput = primeNumberCalculator.GetDistinctIntegers(input);
@@ -202,9 +200,9 @@ namespace NaiveWordCounter.Tests
 		public void GetListOfPrimes_ShouldReturnCorrectBooleans_WhenPassedListOfIntegers()
 		{
 			//Arrange
-			var input = new List<int>() { 1, 2, 97, 98 };
+			var input = new List<int> { 1, 2, 97, 98 };
 			var primeNumberCalculator = new PrimeNumberCalculator();			
-			var expectedOutput = new Dictionary<int, bool>()
+			var expectedOutput = new Dictionary<int, bool>
 			{
 				{2, true}, 
 				{97, true}
@@ -252,7 +250,7 @@ namespace NaiveWordCounter.Tests
 		{
 			//Arrange
 			var primeNumberCalculator = new PrimeNumberCalculator();
-			var input = new Dictionary<string, int>() { 
+			var input = new Dictionary<string, int> { 
 				{"you", 22},
 				{"your", 13},
 				{"to", 10},
@@ -260,7 +258,7 @@ namespace NaiveWordCounter.Tests
 				{"of", 6},
 				{"great", 5}
 			};
-			var expectedOutput = new Dictionary<int, bool>(){
+			var expectedOutput = new Dictionary<int, bool> {
 				{13, true},
 				{7, true},
 				{5, true}
@@ -279,13 +277,13 @@ namespace NaiveWordCounter.Tests
 		{
 			//Arrange
 			var outputGenerator = new OutputGenerator();
-			var wordCountResults = new Dictionary<string, int>() { 
+			var wordCountResults = new Dictionary<string, int> { 
 				{"compare", 22},
 				{"the", 13},
 				{"market", 10},
-				{"codeTest", 7},
+				{"codeTest", 7}
 			};
-			var listOfPrimes = new Dictionary<int, bool>(){
+			var listOfPrimes = new Dictionary<int, bool> {
 				{13, true},
 				{7, true},
 				{5, true}
@@ -295,7 +293,7 @@ namespace NaiveWordCounter.Tests
 				"compare, 22, False", 
 				"the, 13, True",
 				"market, 10, False", 
-				"codeTest, 7, True",
+				"codeTest, 7, True"
 			};
 
 			//Act

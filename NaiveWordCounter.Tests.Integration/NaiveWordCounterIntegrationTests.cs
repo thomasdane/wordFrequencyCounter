@@ -19,7 +19,7 @@ namespace NaiveWordCounter.Tests.Integration
 			IOutputGenerator outputGenerator = new OutputGenerator();
 			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
 			var input = "WarAndPeace.txt";
-			var expectedOutput = new string[]
+			var expectedOutput = new []
 			{
 				"the, 34562, False", 
 				"and, 22148, False",
@@ -46,7 +46,7 @@ namespace NaiveWordCounter.Tests.Integration
 			IOutputGenerator outputGenerator = new OutputGenerator();
 			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
 			var input = "TwoCopiesOfWarAndPeace.txt";
-			var expectedOutput = new string[]
+			var expectedOutput = new []
 			{
 				"the, 69124, False", 
 				"and, 44296, False",
@@ -73,7 +73,7 @@ namespace NaiveWordCounter.Tests.Integration
 			IOutputGenerator outputGenerator = new OutputGenerator();
 			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
 			var input = "RailwayChildren.txt";
-			var expectedOutput = new string[]
+			var expectedOutput = new []
 			{
 				"the, 3344, False", 
 				"and, 2390, False",

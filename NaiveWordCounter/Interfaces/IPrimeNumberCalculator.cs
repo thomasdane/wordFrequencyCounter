@@ -6,7 +6,7 @@ namespace NaiveWordCounter.Interfaces
 	{
 		List<int> GetDistinctIntegers(IDictionary<string, int> wordCountResults);
 		IDictionary<int, bool> CalculatePrimes(IDictionary<string, int> wordCountResults);
-		IDictionary<int, bool> GetListOfPrimes(IList<int> ListOfIntegers);
+		IDictionary<int, bool> GetListOfPrimes(IList<int> listOfIntegers);
 		bool IsPrime(int integer);
 	}
 }
