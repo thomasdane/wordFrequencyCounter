@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Compile Include="WordCounterUnitTests.SecondVersion.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
@@ -89,7 +90,6 @@
   <ItemGroup>
     <Content Include="Books\AFewSentences.txt" />
     <Content Include="Books\HelloWorld.txt" />
-    <Content Include="Books\Primes.txt" />
     <Content Include="Books\RailwayChildren.txt" />
     <Content Include="Books\SingleSentence.txt" />
     <Content Include="Books\42LinesOfText.txt" />

@@ -69,7 +69,8 @@ There are lots of ways to find primes fast, as discussed here: http://stackoverf
 
 - Here one approach I tried was hardcoding a list of smaller primes and comparing to that array before calculating the prime.  
 
-- My algorithm to find primes is O(n**2) which is really bad. It has a for loop inside a for loop. 
+![Screenshot](ImagesForReadme/HardCodedPrimes.png)
+
 
 Another way might be to hardcode the list of primes and then check against them: 
 https://www.dotnetperls.com/prime

@@ -13,3 +13,4 @@ C:\git\NaiveWordCounter\NaiveWordCounter.Tests.Integration\bin\Debug\NaiveWordCo
 C:\git\NaiveWordCounter\NaiveWordCounter.Tests.Integration\bin\Debug\nunit.framework.xml
 C:\git\NaiveWordCounter\NaiveWordCounter.Tests.Integration\obj\Debug\NaiveWordCounter.Tests.Integration.dll
 C:\git\NaiveWordCounter\NaiveWordCounter.Tests.Integration\obj\Debug\NaiveWordCounter.Tests.Integration.pdb
+C:\git\NaiveWordCounter\NaiveWordCounter.Tests.Integration\obj\Debug\WordCounter.Tests.Integration.csprojResolveAssemblyReference.cache

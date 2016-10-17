@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Benchmarks.cs" />
+    <Compile Include="CompareTheWords.cs" />
     <Compile Include="FileReader.cs" />
     <Compile Include="Interfaces\IFileReader.cs" />
     <Compile Include="Interfaces\IWordCounter.cs" />
@@ -50,6 +52,7 @@
     <Compile Include="PrimeNumberCalculator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecondVersion\PrimeNumberCalculator_HardCoded.cs" />
     <Compile Include="WordCounter.cs" />
   </ItemGroup>
   <ItemGroup>
