@@ -102,7 +102,26 @@ Digging further into that code, the regex performs sometimes twice as slow as th
 
 So let's refactor! 
 
+I swapped out the regex for a comparison based on chars. I also used a StringBuilder to create the word
+at the end without creating an intermediate string object on each step. 
 
+![Screenshot](ImagesForReadme/CodeNoRegex.png)
+
+And the results were much better! The smaller book was less than half the speed! The longer book about a third less. 
+
+![Screenshot](ImagesForReadme/RegexResults.png)
+
+Why is this? 
+
+The performance for regex is really quite bad. 
+
+http://stackoverflow.com/questions/12428776/why-are-c-sharp-compiled-regular-expressions-faster-than-equivalent-string-metho
+
+https://blogs.msdn.microsoft.com/debuggingtoolbox/2008/04/02/comparing-regex-replace-string-replace-and-stringbuilder-replace-which-has-better-performance/
+
+Based on some comments online, I tried new Regex("[^\\p{L}]", RegexOptions.Compiled)
+
+but the results were even slower for the regex! 
 
 ##Benchmarks
 
