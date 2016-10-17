@@ -13,7 +13,7 @@ namespace NaiveWordCounter
 		{
 			BenchMarksVersion1.RailwayChildrenVersion1();
 		//	BenchMarks_HardCodedPrimes.RailwayChildren_HardCodedPrimes();
-			BenchMarksVersion1.WarAndPeaceVersion1();
+			//BenchMarksVersion1.WarAndPeaceVersion1();
 		//	BenchMarks_HardCodedPrimes.WarAndPeace_HardCodedPrimes();
 
 			Console.ReadLine();

@@ -40,48 +40,69 @@ I added unicode support and tests for non-latin alphabets. I included War and Pe
 https://en.wikipedia.org/wiki/List_of_longest_novels
 So I coplied War And Peace twice into the one file, producing a book far longer than the longest ever book. 
 
+####Primes
+
+I had never dealt with primes before, so started researching the Sieve of Eratosthenes vs Sieve of Atkin. 
+Then I realised I did not have to GENERATE primes! Only determine if an integer IS prime. A lesson on reading requirements carefully. 
+
 ##Other Solutions with Pros and Cons
 
 In terms of a very different solution, it would be great to try this task with F# and a functional approach. Given time, I would love to try it. 
 Nevertheless, along the way there were various places for mini optimizations.
 
+###Benchmarking
+
 The interfaces allowed me to define second versions of all the methods. 
 
 I put these in a folder called SecondVersion. 
 
-####1. File Reader
+Initially I thought that finding primes would be the slowest part of the app. 
 
-One way to speed this up would be to pre-allocate the size of the array  http://cc.davelozinski.com/c-sharp/the-fastest-way-to-read-and-process-text-files
+####3. Prime numbers
 
-####2. Word Counter
-
-String.split could create a large number of string objects if the line is long, and perhaps parsing by chars is faster http://stackoverflow.com/questions/8784517/counting-number-of-words-in-c-sharp
-
-####3. Prime number calculator
-
-I had never dealt with primes before, so started researching the Sieve of Eratosthenes vs Sieve of Atkin. 
-Then I realised I did not have to GENERATE primes! Only determine if an integer IS prime. A lesson on reading requirements carefully. 
-
-I initially wrote a very simple (slow) prime calculator. The worst part about it is it does not skip numbers
+**Original approach**
+The original prime number calculator is not very sophisticated at all. The worst part about it is it does not skip numbers
 that are multiples of numbers already tested. For example, once we know that the integer is not divisible by 5
-we do not need to check 10, 15, 20 and so on. It also checks all numbers, not stopping at the square root of the number [Discussion][1].
-Update: I included a condition to stop at the square root. 
+we do not need to check 10, 15, 20 and so on. Initially it did not even stop at the square root of the target number, but I added that later [Discussion][1].
 There are lots of ways to find primes fast, as discussed here: http://stackoverflow.com/questions/15743192/check-if-number-is-prime-number
 
-- Here one approach I tried was hardcoding a list of smaller primes and comparing to that array before calculating the prime.  
+**Alternative**
+I read how .NET hardcodes primes to speed up HashHelpers https://www.dotnetperls.com/prime
+
+I thought I could hardcode a list of smaller primes (less than the max count in War and Peace). Then, see if the list contains the integer before calculating the prime.  
 
 ![Screenshot](ImagesForReadme/HardCodedPrimes.png)
 
 You can see that for RailwayChildren (a smaller result set) the hardcoded list was nearly twice as fast in all benchmarks. 
-For War and Peace, the results varied slightly be on average the two methods performed the same. I then refactored to use a HashSet, 
+For War and Peace however (larger result set), the results varied slightly but on average the hardcoded list was slower. I then refactored to use a HashSet, 
 which has O(1) lookups: http://stackoverflow.com/questions/9812020/what-is-the-lookup-time-complexity-of-hashsettiequalitycomparert
 
-The results were the same! This makes me think the bottleneck is not at Calculating Primes, so I will look
-somewhere else. 
+The results were the same! This makes me think the bottleneck is not at Calculating Primes. 
+
+So I ran a benchmark against all the methods and discovered major bottleneck is in WordCounter: 
+
+![Screenshot](ImagesForReadme/bottleneck.png)
 
 
-Another way might be to hardcode the list of primes and then check against them: 
-https://www.dotnetperls.com/prime
+####2. Word Counter
+
+One theory was that String.split could create a large number of string objects if the line is long, and perhaps parsing by chars is faster http://stackoverflow.com/questions/8784517/counting-number-of-words-in-c-sharp
+
+However when I ran more targeted benchmarks, it seems string.split is not the main problem:
+
+![Screenshot](ImagesForReadme/WordCountBottleneck.png)
+
+By far the most expensive code is the loop which replaces the punctuation and then adds/updates the dictionary:
+
+![Screenshot](ImagesForReadme/ExpensiveCode.png)
+
+Digging further into that code, the regex performs sometimes twice as slow as the add/update: 
+
+![Screenshot](ImagesForReadme/Regex.png)
+
+So let's refactor! 
+
+
 
 ##Benchmarks
 
@@ -95,6 +116,8 @@ When someone enters a book name, we can first lookup the database to check if we
 The brute force solution would be to spin this program up on multiple instances and process 1 book per instance. 
 I have read about running .NET/C# on AWS Lambda by having node spawn the .NET process http://itmeze.com/2016/01/06/running-c-on-aws-lambda
 So we could run program on Lambda, and have it run every time a new book is uploaded to S3. 
+- Other mini optimizations: File Reader - One way to speed this up would be to pre-allocate the size of the array  http://cc.davelozinski.com/c-sharp/the-fastest-way-to-read-and-process-text-files
+
 
 ##Limitations
 - words with hyphens will have issues. they will be counted correctly, but display incorrectly. for example,
