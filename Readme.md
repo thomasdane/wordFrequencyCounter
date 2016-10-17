@@ -65,11 +65,19 @@ Then I realised I did not have to GENERATE primes! Only determine if an integer 
 I initially wrote a very simple (slow) prime calculator. The worst part about it is it does not skip numbers
 that are multiples of numbers already tested. For example, once we know that the integer is not divisible by 5
 we do not need to check 10, 15, 20 and so on. It also checks all numbers, not stopping at the square root of the number [Discussion][1].
+Update: I included a condition to stop at the square root. 
 There are lots of ways to find primes fast, as discussed here: http://stackoverflow.com/questions/15743192/check-if-number-is-prime-number
 
 - Here one approach I tried was hardcoding a list of smaller primes and comparing to that array before calculating the prime.  
 
 ![Screenshot](ImagesForReadme/HardCodedPrimes.png)
+
+You can see that for RailwayChildren (a smaller result set) the hardcoded list was nearly twice as fast in all benchmarks. 
+For War and Peace, the results varied slightly be on average the two methods performed the same. I then refactored to use a HashSet, 
+which has O(1) lookups: http://stackoverflow.com/questions/9812020/what-is-the-lookup-time-complexity-of-hashsettiequalitycomparert
+
+The results were the same! This makes me think the bottleneck is not at Calculating Primes, so I will look
+somewhere else. 
 
 
 Another way might be to hardcode the list of primes and then check against them: 
