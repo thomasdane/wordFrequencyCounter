@@ -232,7 +232,7 @@ namespace NaiveWordCounter.Tests
 
 		[Test]
 		public void IsPrime_ShouldReturnFalse_WhenPassedKnownNonPrimes(
-			[Values(1, 4, 50, 1738, 4004)] int input)
+			[Values(1, 4, 9, 16, 50, 1738, 4004)] int input)
 		{
 			//Arrange
 			var primeNumberCalculator = new PrimeNumberCalculator();

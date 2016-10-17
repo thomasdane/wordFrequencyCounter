@@ -41,7 +41,7 @@ namespace NaiveWordCounter
 			if (integer == 2) return true;
 			if (integer % 2 == 0) return false; //Even numbers   
 
-			for (int i = 3; i < Math.Sqrt(integer); i += 2)
+			for (int i = 3; i <= Math.Sqrt(integer); i += 2)
 			{
 				if (integer % i == 0) return false;
 			}
