@@ -53,5 +53,93 @@ namespace NaiveWordCounter.Tests
 			//Assert
 			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
 		}
+
+		//WordCounterWithoutRegex Tests
+		[Test]
+		public void CountWords_ShouldReturnDictionaryOfCorrectNumbers_WhenPassedStringArray()
+		{
+			//Arrange
+			var wordCounter = new WordCounterWithoutRegex();
+			var input = new[] { "hello world world", "hello world world" };
+			var expectedOutput = new Dictionary<string, int>{
+				{"hello", 2},
+				{"world", 4}
+			};
+
+			//Act
+			var actualOutput = wordCounter.Count(input);
+
+			//Arrange
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
+		}
+
+		[Test]
+		public void CountWords_ShouldIgnorePunctuationAndNumbers_WhenPassedEnglishText()
+		{
+			//Arrange
+			var wordCounter = new WordCounterWithoutRegex();
+			var input = new[] { "Hello worlD & World 1", "hello WORLD, world 1" };
+			var expectedOutput = new Dictionary<string, int>{
+				{"hello", 2},
+				{"world", 4}
+			};
+
+			//Act
+			var actualOutput = wordCounter.Count(input);
+
+			//Arrange
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
+		}
+
+		[Test]
+		public void WordCounter_ShouldIgnorePunctuationAndNumbers_WhenTextInOtherLanguages()
+		{
+			//Arrange
+			var wordCounter = new WordCounterWithoutRegex();
+			var input = new[] { "«здравствулте мир»", "「你好世界」。" }; //'Hello World' in Chinese and Russian, with native punctuation
+			var expectedOutput = new Dictionary<string, int>{
+				{"здравствулте", 1},
+				{"мир", 1},
+				{"你好世界", 1}
+			};
+
+			//Act
+			var actualOutput = wordCounter.Count(input);
+			//One does not simply compare two unicode strings. They need to be escaped. 
+			//More information: http://stackoverflow.com/questions/9461971/nunit-how-to-compare-strings-containing-composite-unicode-characters
+			var ActualChineseHelloWorld = System.Uri.UnescapeDataString(actualOutput.Keys.Last());
+			var ActualRussianHelloWorld = System.Uri.UnescapeDataString(actualOutput.Keys.First());
+			var ExpectedChineseHelloWorld = System.Uri.UnescapeDataString(expectedOutput.Keys.Last());
+			var ExpectedRussianHelloWorld = System.Uri.UnescapeDataString(expectedOutput.Keys.First());
+
+			//Assert
+			Assert.AreEqual(ExpectedChineseHelloWorld, ActualChineseHelloWorld);
+			Assert.AreEqual(ExpectedRussianHelloWorld, ActualRussianHelloWorld);
+		}
+
+		[Test]
+		public void WordCounter_ShouldReturnCorrectCount_WhenPassedSentencesWithFullStops()
+		{
+			//Regression test to address issue with full stops. 
+			//Arrange
+			var wordCounter = new WordCounterWithoutRegex();
+			var input = new[]{
+				"hello world!",
+				"hello world.",
+				"Let's test."
+			};
+			var expectedOutput = new Dictionary<string, int> { 
+				{"hello", 2},
+				{"world", 2},
+				{"lets", 1},
+				{"test", 1}
+			};
+
+			//Act
+			var actualOutput = wordCounter.Count(input);
+
+			//Assert
+			CollectionAssert.AreEquivalent(expectedOutput, actualOutput);
+		}
 	}
 }

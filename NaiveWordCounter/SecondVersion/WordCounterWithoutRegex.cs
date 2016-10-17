@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Collections.Concurrent;
 using System.Text;
+using System.Threading.Tasks;
 using NaiveWordCounter.Interfaces;
 
-namespace NaiveWordCounter
+namespace NaiveWordCounter.SecondVersion
 {
 	public class WordCounterWithoutRegex : IWordCounter
 	{
@@ -36,10 +36,6 @@ namespace NaiveWordCounter
 					if (!string.IsNullOrEmpty(word.ToString()))
 					{
 						result.AddOrUpdate(word, 1, (key, value) => value + 1);
-						//AddOrUpdate: 
-						//Add 'word' (first parameter) with a value of 1 (second parameter) if it does NOT exist
-						//Otherwise, add it as a new key, and add 1 to its value (third param)
-						//Explanation here https://www.dotnetperls.com/concurrentdictionary
 					}
 				}
 			});

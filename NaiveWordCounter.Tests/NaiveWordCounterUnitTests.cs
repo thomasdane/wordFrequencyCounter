@@ -87,13 +87,13 @@ namespace NaiveWordCounter.Tests
 		public void CountWords_ShouldIgnorePunctuationAndNumbers_WhenPassedEnglishText()
 		{
 			//Arrange
+			var wordCounter = new WordCounter();
+			var input = new[] { "Hello worlD & World 1", "hello WORLD, world 1" };
 			var expectedOutput = new Dictionary<string, int>{
 				{"hello", 2},
 				{"world", 4}
 			};
-			var wordCounter = new WordCounter();
-			var input = new [] { "Hello worlD & World 1", "hello WORLD, world 1" };
-
+	
 			//Act
 			var actualOutput = wordCounter.Count(input);
 
