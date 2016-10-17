@@ -47,6 +47,8 @@ Nevertheless, along the way there were various places for mini optimizations.
 
 The interfaces allowed me to define second versions of all the methods. 
 
+I put these in a folder called SecondVersion. 
+
 ####1. File Reader
 
 One way to speed this up would be to pre-allocate the size of the array. 
