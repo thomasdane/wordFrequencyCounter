@@ -2,25 +2,25 @@
 
 ##Requirements
 
-1. Write an application that outputs the individual words that appear in a book, and how many times that word appears in the text file.
+- Write an application that outputs the individual words that appear in a book, and how many times that word appears in the text file.
 
-2. The second part is to also output whether the number of times each word appears is a prime number.
+- The second part is to also output whether the number of times each word appears is a prime number.
 
 
 The following assumptions can be made:
 
--Ignore punctuation and capitalisation
+- Ignore punctuation and capitalisation
 
--The code should compile and run on a machine with VS/Xamarin and NUnit
+- The code should compile and run on a machine with VS/Xamarin and NUnit
 
 
 It would be beneficial to:
 
--come up with more than one solution and be able to talk about the pros and cons to each
+- come up with more than one solution and be able to talk about the pros and cons to each
 
--ensure the application scales and performs optimally
+- ensure the application scales and performs optimally
 
--Use TDD in the approach to writing the application
+- Use TDD in the approach to writing the application
 
 
 [DRAFT]
@@ -36,17 +36,16 @@ A class called ConcurrentDictionary allows us to keep track of the totals: http:
 - I have not done much multithreading or parallel stuff before, beyond a 'hello world' out of curiosity. 
 I wanted to dive deeper so read http://www.i-programmer.info/programming/c/1420-the-perils-of-the-c-parallel-for-.html
 
+I added unicode support and tests for non-latin alphabets. I included War and Peace as an example, but it is not the longest novel ever written.
+https://en.wikipedia.org/wiki/List_of_longest_novels
+So I coplied War And Peace twice into the one file, producing a book far longer than the longest ever book. 
+
 ##Other Solutions with Pros and Cons
 
 In terms of a very different solution, it would be great to try this task with F# and a functional approach. Given time, I would love to try it. 
 Nevertheless, along the way there were various places for mini optimizations.
 
 The interfaces allowed me to define second versions of all the methods. 
-
-Long Books/Text Files
-
-- I included War and Peace as an example, but it is not the longest novel ever written. https://en.wikipedia.org/wiki/List_of_longest_novels
-So I copy and pasted the book twice into the one file, producing a book far longer than the longest ever book. 
 
 ####1. File Reader
 
@@ -63,7 +62,7 @@ Then I realised I did not have to GENERATE primes! Only determine if an integer 
 
 I initially wrote a very simple (slow) prime calculator. The worst part about it is it does not skip numbers
 that are multiples of numbers already tested. For example, once we know that the integer is not divisible by 5
-we do not need to check 10, 15, 20 and so on. It also checks all numbers, not stopping at the square root of the number [1].
+we do not need to check 10, 15, 20 and so on. It also checks all numbers, not stopping at the square root of the number [Discussion][1].
 There are lots of ways to find primes fast, as discussed here: http://stackoverflow.com/questions/15743192/check-if-number-is-prime-number
 
 - Here one approach I tried was hardcoding a list of smaller primes and comparing to that array before calculating the prime.  
@@ -76,12 +75,6 @@ https://www.dotnetperls.com/prime
 ##Benchmarks
 
 Based on the results above, the fastest method of all was: 
-
-
-
-##Extensions
-
-What if the book is in another language? I added unicode support and tests for non-latin alphabets. 
 
 ##Optimizations and scaling
 
@@ -112,7 +105,7 @@ It seems there is some variation in counting words.
 If the business/customer wanted it in the case of this application, it would be easy to create a list of such common words and exclude them from the results. 
 It may even speed up the app by excluding the most common results.  
 
-[1]Learnings about Primes
+[1]: Learnings about Primes
 
 Why do we only need to test up to the square root of a number to determine if it is prime? 
 
