@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using NaiveWordCounter.Interfaces;
+using WordFrequencyCounter.Tests.Unit.Interfaces;
+using WordFrequencyCounter.Tests.Unit.Interfaces;
 
-namespace NaiveWordCounter
+namespace WordFrequencyCounter.Tests.Unit
 {
 	public class OutputGenerator : IOutputGenerator
 	{

@@ -2,10 +2,10 @@
 using System.Linq;
 using NUnit.Framework;
 
-namespace NaiveWordCounter.Tests
+namespace WordFrequencyCounter.Tests.Unit
 {
 	[TestFixture]
-    public class NaiveWordCounterUnitTests
+	public class WordFrequencyCounterUnitTests
     {
 		//I am going to be committing more than usual here. I want to show thought process. 
 		//At work, I would prefer to rebase into smaller clean commits before merging to master. 

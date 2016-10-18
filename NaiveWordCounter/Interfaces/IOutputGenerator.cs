@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NaiveWordCounter.Interfaces
+namespace WordFrequencyCounter.Tests.Unit.Interfaces
 {
 	public interface IOutputGenerator
 	{

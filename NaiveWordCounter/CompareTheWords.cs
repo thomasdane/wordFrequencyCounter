@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using NaiveWordCounter.Interfaces;
+using WordFrequencyCounter.Tests.Unit.Interfaces;
 
-namespace NaiveWordCounter
+namespace WordFrequencyCounter.Tests.Unit
 {
 	public class CompareTheWords
 	{

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
-using NaiveWordCounter.Interfaces;
 using System.Diagnostics;
+using WordFrequencyCounter.Tests.Unit.Interfaces;
+using WordFrequencyCounter.Tests.Unit.Interfaces;
 
-namespace NaiveWordCounter
+namespace WordFrequencyCounter.Tests.Unit
 {
 	class Program
 	{

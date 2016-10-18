@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using NaiveWordCounter.Interfaces;
-using NaiveWordCounter.SecondVersion;
+using WordFrequencyCounter.Tests.Unit.Interfaces;
+using WordFrequencyCounter.Tests.Unit.SecondVersion;
 
-namespace NaiveWordCounter
+namespace WordFrequencyCounter.Tests.Unit
 {
 	public static class BenchMarksVersion1
 	{

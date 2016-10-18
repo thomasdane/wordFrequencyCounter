@@ -3,9 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
-using NaiveWordCounter.Interfaces;
+using WordFrequencyCounter.Tests.Unit.Interfaces;
+using WordFrequencyCounter.Tests.Unit.Interfaces;
 
-namespace NaiveWordCounter
+namespace WordFrequencyCounter.Tests.Unit
 {
 	public class WordCounter : IWordCounter
 	{

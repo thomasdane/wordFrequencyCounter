@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using NaiveWordCounter.Interfaces;
+using WordFrequencyCounter.Tests.Unit.Interfaces;
 
-namespace NaiveWordCounter
+namespace WordFrequencyCounter.Tests.Unit
 {
 	public class FileReader : IFileReader
 	{

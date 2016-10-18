@@ -1,0 +1,6 @@
+C:\git\WordFrequencyCounter\NaiveWordCounter\bin\Debug\WordFrequencyCounter.exe.config
+C:\git\WordFrequencyCounter\NaiveWordCounter\bin\Debug\WordFrequencyCounter.exe
+C:\git\WordFrequencyCounter\NaiveWordCounter\bin\Debug\WordFrequencyCounter.pdb
+C:\git\WordFrequencyCounter\NaiveWordCounter\obj\Debug\WordFrequencyCounter.csprojResolveAssemblyReference.cache
+C:\git\WordFrequencyCounter\NaiveWordCounter\obj\Debug\WordFrequencyCounter.exe
+C:\git\WordFrequencyCounter\NaiveWordCounter\obj\Debug\WordFrequencyCounter.pdb

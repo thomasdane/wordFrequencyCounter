@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NaiveWordCounter.Interfaces;
+using WordFrequencyCounter.Tests.Unit.Interfaces;
+using WordFrequencyCounter.Tests.Unit.Interfaces;
 
-namespace NaiveWordCounter.SecondVersion
+namespace WordFrequencyCounter.Tests.Unit.SecondVersion
 {
 	public class PrimeNumberCalculator_HardCoded : IPrimeNumberCalculator
 	{

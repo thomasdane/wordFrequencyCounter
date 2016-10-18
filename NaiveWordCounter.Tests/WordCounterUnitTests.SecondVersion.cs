@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using NaiveWordCounter.SecondVersion;
 using NUnit.Framework;
+using WordFrequencyCounter.Tests.Unit.SecondVersion;
 
-namespace NaiveWordCounter.Tests
+namespace WordFrequencyCounter.Tests.Unit.Tests
 {
 	[TestFixture]
-	public class NaiveWordCounterUnitTestsSecondVersion
+	public class WordFrequencyCounterUnitTestsSecondVersion
 	{
 		//PrimeNumberCalculatorHardCoded Tests
 		[Test]
