@@ -1,4 +1,6 @@
-#Readme
+#Word Frequency Counter
+
+This is a technical test to parse text files and count the frequency of words. 
 
 ##Requirements
 
@@ -22,8 +24,12 @@ It would be beneficial to:
 
 - Use TDD in the approach to writing the application
 
+##Installation
 
-[DRAFT]
+- git clone git@github.com:thomasdane/wordFrequencyCounter.git
+- open the solution in Visual Studio
+- the build may fail because Nunit is missing. 
+- 
 
 ##Approach
 
