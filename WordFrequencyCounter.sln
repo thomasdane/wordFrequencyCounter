@@ -3,16 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordFrequencyCounter", "NaiveWordCounter\WordFrequencyCounter.csproj", "{E0E7F366-1C6A-4FFF-900D-9CAF07FD30F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordFrequencyCounter", "WordFrequencyCounter\WordFrequencyCounter.csproj", "{E0E7F366-1C6A-4FFF-900D-9CAF07FD30F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordFrequencyCounter.Tests.Unit", "NaiveWordCounter.Tests\WordFrequencyCounter.Tests.Unit.csproj", "{FCA4EA61-AEAD-4124-98E2-3F668FEB4B4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordFrequencyCounter.Tests.Unit", "WordFrequencyCounter.Tests.Unit\WordFrequencyCounter.Tests.Unit.csproj", "{FCA4EA61-AEAD-4124-98E2-3F668FEB4B4B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{15C74635-00CB-4820-A73D-7ECE09661747}"
 	ProjectSection(SolutionItems) = preProject
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordFrequencyCounter.Tests.Integration", "NaiveWordCounter.Tests.Integration\WordFrequencyCounter.Tests.Integration.csproj", "{5C5A23C5-856C-41E4-BB9A-29F5F2F1646B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordFrequencyCounter.Tests.Integration", "WordFrequencyCounter.Tests.Integration\WordFrequencyCounter.Tests.Integration.csproj", "{5C5A23C5-856C-41E4-BB9A-29F5F2F1646B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

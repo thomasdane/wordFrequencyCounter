@@ -82,7 +82,7 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NaiveWordCounter\WordFrequencyCounter.csproj">
+    <ProjectReference Include="..\WordFrequencyCounter\WordFrequencyCounter.csproj">
       <Project>{e0e7f366-1c6a-4fff-900d-9caf07fd30f9}</Project>
       <Name>WordFrequencyCounter</Name>
     </ProjectReference>
