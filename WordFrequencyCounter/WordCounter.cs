@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
 using WordFrequencyCounter.Tests.Unit.Interfaces;
-using WordFrequencyCounter.Tests.Unit.Interfaces;
 
 namespace WordFrequencyCounter.Tests.Unit
 {

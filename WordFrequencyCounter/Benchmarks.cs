@@ -36,7 +36,7 @@ namespace WordFrequencyCounter.Tests.Unit
 			Stopwatch sw = new Stopwatch();
 			sw.Start();
 
-			compareTheWords.Compare("WarAndPeace.txt");
+			compareTheWords.Compare("TwoCopiesOfWarAndPeace.txt");
 
 			sw.Stop();
 			Console.WriteLine("{0} = War and Peace Regular", sw.Elapsed);
@@ -73,7 +73,7 @@ namespace WordFrequencyCounter.Tests.Unit
 			Stopwatch sw = new Stopwatch();
 			sw.Start();
 
-			compareTheWords.Compare("WarAndPeace.txt");
+			compareTheWords.Compare("TwoCopiesOfWarAndPeace.txt");
 
 			sw.Stop();
 			Console.WriteLine("{0} = War and Peace hardcoded primes", sw.Elapsed);

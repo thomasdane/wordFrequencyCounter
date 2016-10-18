@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Books\RailwayChildren.txt" />
+    <Content Include="Books\TwoCopiesOfWarAndPeace.txt" />
     <Content Include="Books\WarAndPeace.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
