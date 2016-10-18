@@ -43,7 +43,7 @@ It would be beneficial to:
 
 We don't use TDD at work, but I thoroughly enjoyed using it here. 
 
-I might even start using it for my side-project! It made resolving bugs far less stressful.  
+I might even start using it for my side-project! It made catching bugs less stressful, and helped me think about the problem.
 
 ####Parsing text
 

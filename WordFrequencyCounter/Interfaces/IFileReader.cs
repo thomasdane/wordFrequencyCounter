@@ -1,4 +1,4 @@
-﻿namespace WordFrequencyCounter.Tests.Unit.Interfaces
+﻿namespace WordFrequencyCounter.Interfaces
 {
 	public interface IFileReader
 	{

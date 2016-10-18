@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using WordFrequencyCounter.Tests.Unit.Interfaces;
+﻿using System.Collections.Generic;
+using WordFrequencyCounter.Interfaces;
 
-namespace WordFrequencyCounter.Tests.Unit
+namespace WordFrequencyCounter
 {
 	public class CompareTheWords
 	{

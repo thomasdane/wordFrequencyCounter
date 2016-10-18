@@ -17,8 +17,8 @@ namespace WordFrequencyCounter.Tests.Unit
 		{
 			//Arrange
 			var fileHandler = new FileReader();
-			var input = "SingleSentence.txt";
-			var expectedOutput = "The quick brown fox";
+			const string input = "SingleSentence.txt";
+			const string expectedOutput = "The quick brown fox";
 
 			//Act
 			var actualOutput = fileHandler.ReadTextFile(input);
@@ -33,10 +33,10 @@ namespace WordFrequencyCounter.Tests.Unit
 		{
 			//Arrange
 			var fileHandler = new FileReader();
-			var input = "42LinesOfText.txt";
+			const string input = "42LinesOfText.txt";
 			var expectedOutput = new string[42]; 
-			var firstLine = "Lorem ipsum dolor sit amet";
-			var lastLine = "deserunt mollit anim id est laborum";
+			const string firstLine = "Lorem ipsum dolor sit amet";
+			const string lastLine = "deserunt mollit anim id est laborum";
 
 			//Act
 			var actualOutput = fileHandler.ReadTextFile(input);
@@ -117,14 +117,14 @@ namespace WordFrequencyCounter.Tests.Unit
 			var actualOutput = wordCounter.Count(input);
 			//One does not simply compare two unicode strings. They need to be escaped. 
 			//More information: http://stackoverflow.com/questions/9461971/nunit-how-to-compare-strings-containing-composite-unicode-characters
-			var ActualChineseHelloWorld = System.Uri.UnescapeDataString(actualOutput.Keys.Last());
-			var ActualRussianHelloWorld = System.Uri.UnescapeDataString(actualOutput.Keys.First());
-			var ExpectedChineseHelloWorld = System.Uri.UnescapeDataString(expectedOutput.Keys.Last());
-			var ExpectedRussianHelloWorld = System.Uri.UnescapeDataString(expectedOutput.Keys.First());
+			var actualChineseHelloWorld = System.Uri.UnescapeDataString(actualOutput.Keys.Last());
+			var actualRussianHelloWorld = System.Uri.UnescapeDataString(actualOutput.Keys.First());
+			var expectedChineseHelloWorld = System.Uri.UnescapeDataString(expectedOutput.Keys.Last());
+			var expectedRussianHelloWorld = System.Uri.UnescapeDataString(expectedOutput.Keys.First());
 
 			//Assert
-			Assert.AreEqual(ExpectedChineseHelloWorld, ActualChineseHelloWorld);
-			Assert.AreEqual(ExpectedRussianHelloWorld, ActualRussianHelloWorld);
+			Assert.AreEqual(expectedChineseHelloWorld, actualChineseHelloWorld);
+			Assert.AreEqual(expectedRussianHelloWorld, actualRussianHelloWorld);
 		}
 
 		[Test]
@@ -221,7 +221,7 @@ namespace WordFrequencyCounter.Tests.Unit
 		{
 			//Arrange
 			var primeNumberCalculator = new PrimeNumberCalculator();
-			var expectedOutput = true;
+			const bool expectedOutput = true;
 
 			//Act
 			var actualOutput = primeNumberCalculator.IsPrime(input);
@@ -236,7 +236,7 @@ namespace WordFrequencyCounter.Tests.Unit
 		{
 			//Arrange
 			var primeNumberCalculator = new PrimeNumberCalculator();
-			var expectedOutput = false;
+			const bool expectedOutput = false;
 
 			//Act
 			var actualOutput = primeNumberCalculator.IsPrime(input);

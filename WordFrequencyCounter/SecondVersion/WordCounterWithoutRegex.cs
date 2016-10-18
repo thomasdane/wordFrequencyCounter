@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WordFrequencyCounter.Tests.Unit.Interfaces;
-using WordFrequencyCounter.Tests.Unit.Interfaces;
+using WordFrequencyCounter.Interfaces;
 
-namespace WordFrequencyCounter.Tests.Unit.SecondVersion
+namespace WordFrequencyCounter.SecondVersion
 {
 	public class WordCounterWithoutRegex : IWordCounter
 	{

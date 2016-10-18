@@ -1,25 +1,29 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using WordFrequencyCounter.Tests.Unit.Interfaces;
-using WordFrequencyCounter.Tests.Unit.Interfaces;
+using WordFrequencyCounter.Interfaces;
 
-namespace WordFrequencyCounter.Tests.Unit.Tests.Integration
+namespace WordFrequencyCounter.Tests.Integration
 {
-
 	[TestFixture]
 	public class WordFrequencyCounterIntegrationTests
 	{
-		[Test]
-		public void CompareTheTextFile_ShouldReturnCorrectResult_WhenPassedWarAndPeace()
+		private readonly CompareTheWords _compareTheWords;
+		
+		public WordFrequencyCounterIntegrationTests()
 		{
-			//Arrange
 			IFileReader fileReader = new FileReader();
 			IWordCounter wordCounter = new WordCounter();
 			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
 			IOutputGenerator outputGenerator = new OutputGenerator();
-			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
-			var input = "WarAndPeace.txt";
+			_compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
+		}
+
+		[Test]
+		public void CompareTheTextFile_ShouldReturnCorrectResult_WhenPassedWarAndPeace()
+		{
+			//Arrange	
+			const string input = "WarAndPeace.txt";
 			var expectedOutput = new []
 			{
 				"the, 34562, False", 
@@ -30,7 +34,7 @@ namespace WordFrequencyCounter.Tests.Unit.Tests.Integration
 			};
 			
 			//Act
-			var actualOutput = compareTheWords.Compare(input);
+			var actualOutput = _compareTheWords.Compare(input);
 			var actualOutputTop5 = actualOutput.Take(5).ToList();
 
 			//Assert
@@ -41,12 +45,7 @@ namespace WordFrequencyCounter.Tests.Unit.Tests.Integration
 		public void CompareTheTextFile_ShouldReturnWordFrequencyAndIsPrime_WhenPassedTwoCopiesOfWarAndPeace()
 		{
 			//Arrange
-			IFileReader fileReader = new FileReader();
-			IWordCounter wordCounter = new WordCounter();
-			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
-			IOutputGenerator outputGenerator = new OutputGenerator();
-			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
-			var input = "TwoCopiesOfWarAndPeace.txt";
+			const string input = "TwoCopiesOfWarAndPeace.txt";
 			var expectedOutput = new []
 			{
 				"the, 69124, False", 
@@ -57,7 +56,7 @@ namespace WordFrequencyCounter.Tests.Unit.Tests.Integration
 			};
 
 			//Act
-			var actualOutput = compareTheWords.Compare(input);
+			var actualOutput = _compareTheWords.Compare(input);
 			var actualOutputTop5 = actualOutput.Take(5).ToList();
 
 			//Assert
@@ -68,12 +67,7 @@ namespace WordFrequencyCounter.Tests.Unit.Tests.Integration
 		public void CompareTheTextFile_ShouldReturnCorrectResults_WhenPassedRailwayChildren()
 		{
 			//Arrange
-			IFileReader fileReader = new FileReader();
-			IWordCounter wordCounter = new WordCounter();
-			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
-			IOutputGenerator outputGenerator = new OutputGenerator();
-			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
-			var input = "RailwayChildren.txt";
+			const string input = "RailwayChildren.txt";
 			var expectedOutput = new []
 			{
 				"the, 3344, False", 
@@ -84,7 +78,7 @@ namespace WordFrequencyCounter.Tests.Unit.Tests.Integration
 			};
 
 			//Act
-			var actualOutput = compareTheWords.Compare(input);
+			var actualOutput = _compareTheWords.Compare(input);
 			var actualOutputTop5 = actualOutput.Take(5).ToList();
 
 			//Assert
@@ -96,13 +90,8 @@ namespace WordFrequencyCounter.Tests.Unit.Tests.Integration
 		public void GetResults_ShouldReturnCorrectCount_WhenPassedThePlacesYoullGo()
 		{
 			//Arrange
-			IFileReader fileReader = new FileReader();
-			IWordCounter wordCounter = new WordCounter();
-			IPrimeNumberCalculator primeNumberCalculator = new PrimeNumberCalculator();
-			IOutputGenerator outputGenerator = new OutputGenerator();
-			var compareTheWords = new CompareTheWords(fileReader, wordCounter, primeNumberCalculator, outputGenerator);
-			var input = "ThePlacesYou'llGo.txt";
-			var expectedOutput = new List<string>() //Used http://www.writewords.org.uk/word_count.asp to verify the results
+			const string input = "ThePlacesYou'llGo.txt";
+			var expectedOutput = new List<string> //Used http://www.writewords.org.uk/word_count.asp to verify the results
 			{
 				"you, 22, False",
 				"and, 16, False",
@@ -117,7 +106,7 @@ namespace WordFrequencyCounter.Tests.Unit.Tests.Integration
 			};
 
 			//Act
-			var actualOutput = compareTheWords.Compare(input);
+			var actualOutput = _compareTheWords.Compare(input);
 
 			//Assert
 			CollectionAssert.AreEquivalent(expectedOutput, actualOutput.Take(10));
