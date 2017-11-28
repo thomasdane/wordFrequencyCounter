@@ -1,9 +1,9 @@
-#Word Frequency Counter
+# Word Frequency Counter
 
 This is a technical test to parse text files and count the frequency of words. 
 
 
-##Requirements
+## Requirements
 
 - Write an application that outputs the individual words that appear in a book, and how many times that word appears in the text file.
 
@@ -24,7 +24,7 @@ It would be beneficial to:
 - Use TDD in the approach to writing the application
 
 
-##Installation
+## Installation
 
 
 - git clone git@github.com:thomasdane/wordFrequencyCounter.git
@@ -36,16 +36,16 @@ It would be beneficial to:
 - Run the program with F5
 
 
-##Approach
+## Approach
 
 
-####TDD
+#### TDD
 
 We don't use TDD at work, but I thoroughly enjoyed using it here. 
 
 I might even start using it for my side-project! It made catching bugs less stressful, and helped me think about the problem.
 
-####Parsing text
+#### Parsing text
 
 Counting each line of text sequentially would have performance drawbacks for very large books. 
 
@@ -61,10 +61,10 @@ http://geekswithblogs.net/blackrabbitcoder/archive/2011/02/17/c.net-little-wonde
 
 I did some further reading about the limitations of ParallelFor (http://www.i-programmer.info/programming/c/1420-the-perils-of-the-c-parallel-for-.html) and it seemed that counting words would be fine: "it works if the for loop is essentially a set of independent operations"
 
-####Other languages
+#### Other languages
 There's lots of great literature written in languages other than English, so I added unicode support and tests for non-latin alphabets. 
 
-####Book length
+#### Book length
 
 I included War and Peace as an example, but it is not the longest novel ever written.
 
@@ -73,22 +73,22 @@ https://en.wikipedia.org/wiki/List_of_longest_novels
 So I copied War And Peace twice into the one file, producing a book longer than the longest ever book. It is still only 6MB though. This program might have different concerns if we were processing GBs or TBs of text. 
 
 
-##Other Solutions with Pros and Cons
+## Other Solutions with Pros and Cons
 
 In terms of a very different solution, it would be great to try this task with F# and a functional approach. Given time, I would love to give it a shot.
 
 Nevertheless, along the way there were various opportunities for other approaches. 
 
 
-###Benchmarking
+### Benchmarking
 
 I created some interfaces which allowed me to swap in different implementations of the methods. These alternative methods are in a folder called 'SecondVersion'
 
 
-###Prime numbers
+### Prime numbers
 
 
-####Original approach
+#### Original approach
 
 The prime number calculator is not very sophisticated. It does not skip numbers that are multiples of numbers already tested. For example, once we know that the integer is not divisible by 5
 
@@ -96,7 +96,7 @@ we do not need to check 10, 15, 20 and so on. Initially it did not even stop at 
 
 There are lots of ways to find primes fast, as discussed here: http://stackoverflow.com/questions/15743192/check-if-number-is-prime-number
 
-####Alternative
+#### Alternative
 
 I read that under the hood .NET hardcodes primes to speed up HashHelpers https://www.dotnetperls.com/prime
 
@@ -121,10 +121,10 @@ So I ran a benchmark against all the methods, first for Railway Children and the
 It turns out that the WordCounter class is by far the slowest!
 
 
-###Word Counter
+### Word Counter
 
 
-####Original Approach
+#### Original Approach
 
 My original code is below: 
 ![Screenshot](ImagesForReadme/WordCountOriginal.png)
@@ -152,7 +152,7 @@ Digging further into that code, the regex performs sometimes twice as slow as th
 
 So let's refactor! 
 
-####Alternative Approach
+#### Alternative Approach
 
 
 I swapped out the regex for a comparison based on chars. I also used a StringBuilder to create the word at the end without creating an intermediate string object on each step. 
@@ -174,7 +174,7 @@ Checkout the results when run against a file containing two copies of War and Pe
 It's more than twice as fast. Based on some comments online, I tried using a Compiled option: Regex("[^\\p{L}]", RegexOptions.Compiled) but for some reason the results were even slower. 
 
 
-####Why is this? 
+#### Why is this? 
 
 I could not find any great answers. 
 
@@ -195,7 +195,7 @@ The best piece of advice I found was that Regex is not suited for this case beca
 Regex is meant for complicated patterns and has overhead to that end."
 
 
-####Pros and Cons
+#### Pros and Cons
 
 Some people may find the Regex.replace method more readable or intuitive. However it is much slower than the method using char.IsLetter
 
@@ -204,7 +204,7 @@ So I think this would be a conversation to have with the team. Is it actually mo
 
 
 
-##Optimizations and scaling
+## Optimizations and scaling
 
 
 - What if someone uploads a book that we have already computed? It would be good to save the results to a database. Then if someone uploads a book, we can first lookup the database and check if we have the results saved.  
@@ -214,7 +214,7 @@ So I think this would be a conversation to have with the team. Is it actually mo
 - Another mini optimisation would be to speed up the FileReader method by pre-allocate the size of the array  http://cc.davelozinski.com/c-sharp/the-fastest-way-to-read-and-process-text-files
 
 
-##Limitations
+## Limitations
 
 - Words with hyphens will have issues. They will be counted correctly, but display incorrectly. For example,
 "free-for-all" will be displayed as "freeforall". 
@@ -228,7 +228,7 @@ So I think this would be a conversation to have with the team. Is it actually mo
 - there is a 2 GB limit on any object in .Net. As rare as it might be, the program won't be able to handle lines larger than that limit. 
 
  
-##Extensions
+## Extensions
 
 - testing for more edge cases and malformed inputs. 
 
@@ -236,6 +236,6 @@ So I think this would be a conversation to have with the team. Is it actually mo
 
 - Some word frequency counters online allow the user to exclude common words like 'the', 'to', 'and' etc. That would be a nice feature. If the business/customer desired, it would be easy to create a list of such common words and exclude them from the results. It may even speed up the app by excluding the most common results.
 
-##Thanks
+## Thanks
 
 Thank you to Murieann and Francois for giving me the opportunity to take this code test. I really enoyed it and learned so much! About TDD, parallelism, benchmarking, primes, and that, ironically, "In Search of Lost Time" is the longest book ever written!
